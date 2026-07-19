@@ -1,26 +1,140 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
+
+  --radius-button: var(--radius-button);
+  --radius-card: var(--radius-card);
+  --radius-input: var(--radius-input);
+  --radius-dialog: var(--radius-dialog);
+  --radius-badge: var(--radius-badge);
+
+  --shadow-soft: var(--shadow-soft);
+  --shadow-soft-hover: var(--shadow-soft-hover);
+
+  /* Spacing Scale override for GrowWithHustler */
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-48: 48px;
+  --spacing-64: 64px;
+  --spacing-96: 96px;
+  --spacing-128: 128px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  /* Color System */
+  --background: #F8F4E8;
+  --foreground: #111111;
+  
+  --card: #FFFFFF;
+  --card-foreground: #111111;
+  
+  --popover: #FFFFFF;
+  --popover-foreground: #111111;
+  
+  --primary: #2457FF;
+  --primary-foreground: #FFFFFF;
+  
+  --secondary: #FFFFFF;
+  --secondary-foreground: #111111;
+  
+  --accent: #FFD43B;
+  --accent-foreground: #111111;
+  
+  --muted: #6B6B6B;
+  --muted-foreground: #6B6B6B;
+  
+  --border: #222222;
+  --input: #222222;
+  --ring: #2457FF;
+
+  --success: #22C55E;
+  --danger: #EF4444;
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+
+  /* Border & Radii */
+  --radius-button: 0px;
+  --radius-card: 24px;
+  --radius-input: 18px;
+  --radius-dialog: 24px;
+  --radius-badge: 999px;
+  
+  /* Default border radius for general use */
+  --radius: 24px;
+
+  /* Shadows (Very soft) */
+  --shadow-soft: 0px 4px 20px -2px rgba(17, 17, 17, 0.05);
+  --shadow-soft-hover: 0px 12px 32px -4px rgba(17, 17, 17, 0.08);
+}
+
+@layer base {
+  * {
+    @apply border-[#222222] outline-ring/50;
+    border-width: 0;
+  }
+  
+  /* Apply global border style */
+  .border-standard {
+    border: 1.5px solid var(--border);
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  html {
+    @apply font-sans;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom underline animation for Ghost button */
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--primary);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
