@@ -59,10 +59,8 @@ export function Navbar() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 w-full h-[88px] flex items-center transition-all duration-300",
-        isScrolled
-          ? "bg-[#F8F4E8]/90 backdrop-blur-md border-b-[1.5px] border-[#222222]/10 shadow-soft"
-          : "bg-transparent"
+        "fixed top-0 left-0 right-0 z-50 w-full h-[88px] flex items-center bg-transparent transition-all duration-300",
+        isScrolled && "backdrop-blur-sm border-b-[1.5px] border-[#222222]/10"
       )}
     >
       <Container className="flex items-center justify-between">
