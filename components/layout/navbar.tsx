@@ -13,7 +13,7 @@ const NAV_ITEMS = [
   { name: "Services", href: "#services" },
   { name: "Projects", href: "#projects" },
   { name: "Case Studies", href: "#case-studies" },
-  { name: "About", href: "#about" },
+  { name: "About", href: "/about" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -59,7 +59,7 @@ export function Navbar() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 w-full h-[88px] flex items-center bg-transparent transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 w-full h-[64px] md:h-[88px] flex items-center bg-transparent transition-all duration-300",
         isScrolled && "backdrop-blur-sm border-b-[1.5px] border-[#222222]/10"
       )}
     >
@@ -127,11 +127,11 @@ export function Navbar() {
         {/* Hamburger Menu Toggle (Mobile) */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex md:hidden items-center justify-center p-8 rounded-button border-[1.5px] border-[#222222] bg-white text-[#111111] hover:bg-accent outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors cursor-pointer"
+          className="flex md:hidden items-center justify-center p-2 rounded-button border-[1.5px] border-[#222222] bg-white text-[#111111] hover:bg-accent outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors cursor-pointer"
           aria-expanded={isOpen}
           aria-label={isOpen ? "Close main menu" : "Open main menu"}
         >
-          {isOpen ? <X className="size-24" /> : <Menu className="size-24" />}
+          {isOpen ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>
       </Container>
 
@@ -143,11 +143,11 @@ export function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.35, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number] }}
-            className="absolute top-[88px] left-0 right-0 w-full bg-[#F8F4E8] border-b-[1.5px] border-[#222222] shadow-soft overflow-hidden flex flex-col md:hidden"
+            className="absolute top-[64px] md:top-[88px] left-0 right-0 w-full bg-[#F8F4E8] border-b-[1.5px] border-[#222222] shadow-soft overflow-hidden flex flex-col md:hidden"
           >
-            <Container className="py-32 flex flex-col gap-24">
+            <Container className="py-6 flex flex-col gap-4">
               <nav aria-label="Mobile Navigation">
-                <ul className="flex flex-col gap-16">
+                <ul className="flex flex-col gap-3">
                   {NAV_ITEMS.map((item) => (
                     <li key={item.name}>
                       <Link

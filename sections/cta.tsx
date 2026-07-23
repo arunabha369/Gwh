@@ -107,7 +107,7 @@ export function CTA() {
       {/* ══════════════════════════════
           MASTER CONTAINER (1280px)
       ══════════════════════════════ */}
-      <div className="relative z-10 w-full max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-10 flex flex-col gap-14">
+      <div className="relative z-10 w-full max-w-[1280px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 flex flex-col gap-10 lg:gap-14">
 
         {/* ───────────────────────────────────
             ROW 1: TWO COLUMN CONVERSION LAYOUT
@@ -132,7 +132,7 @@ export function CTA() {
             <div>
               <h2
                 className="font-heading text-[#111] leading-[1.04] tracking-[-0.035em]"
-                style={{ fontSize: "clamp(36px, 4vw, 56px)", fontWeight: 800 }}
+                style={{ fontSize: "clamp(28px, 4vw, 56px)", fontWeight: 800 }}
               >
                 Let&apos;s Build Your Next{" "}
                 <span className="relative inline-block text-primary">

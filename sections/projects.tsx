@@ -364,7 +364,7 @@ export function Projects() {
       {/* ══════════════════════════════
           MASTER CONTAINER (1280px)
       ══════════════════════════════ */}
-      <div className="relative z-10 w-full max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-10 flex flex-col gap-10 lg:gap-12">
+      <div className="relative z-10 w-full max-w-[1280px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 flex flex-col gap-8 lg:gap-12">
 
         {/* ───────────────────────────────────
             ROW 1: 2-COLUMN LAYOUT

@@ -233,7 +233,7 @@ export function Process() {
       {/* ══════════════════════════════
           MASTER CONTENT WRAPPER
       ══════════════════════════════ */}
-      <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 sm:px-10 lg:px-14 flex flex-col gap-9">
+      <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-6 md:px-10 lg:px-14 flex flex-col gap-7 sm:gap-9">
 
         {/* ───────────────────────────────────
             ROW 1: Left copy + Right cards
@@ -291,7 +291,7 @@ export function Process() {
             <RoadmapConnector />
 
             {/* Cards — mt-5 to give the connector visual breathing room */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 relative z-10 mt-5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 relative z-10 mt-2 lg:mt-5">
               {PROCESS_STEPS.map(({ num, badge, badgeColor, title, desc, Icon, iconBg, iconBorder, iconColor }, idx) => (
                 <motion.div
                   key={num}
@@ -303,7 +303,7 @@ export function Process() {
                     boxShadow: "0 12px 32px rgba(52,104,255,0.12)",
                     borderColor: "#3468FF",
                   }}
-                  className="relative flex flex-col w-full h-[216px] bg-white border-[1.5px] border-[#e2e2e2] rounded-[22px] p-4 cursor-pointer group transition-all duration-300"
+                  className="relative flex flex-col w-full h-auto min-h-[180px] lg:h-[216px] bg-white border-[1.5px] border-[#e2e2e2] rounded-[22px] p-3.5 sm:p-4 cursor-pointer group transition-all duration-300"
                   style={{ boxShadow: "2px 3px 0 rgba(17,17,17,0.04)" }}
                 >
                   {/* Step number */}
@@ -349,13 +349,13 @@ export function Process() {
             Built With Modern Tools
           </p>
           <div
-            className="bg-white border-[1.5px] border-[#e2e2e2] rounded-[20px] px-7 sm:px-10 flex items-center"
-            style={{ height: 84, boxShadow: "2px 3px 0 rgba(17,17,17,0.04)" }}
+            className="bg-white border-[1.5px] border-[#e2e2e2] rounded-[20px] px-4 sm:px-7 md:px-10 py-4 sm:py-0 sm:flex sm:items-center"
+            style={{ minHeight: 84, boxShadow: "2px 3px 0 rgba(17,17,17,0.04)" }}
           >
-            <div className="flex items-center justify-between w-full">
+            <div className="grid grid-cols-2 sm:flex sm:items-center sm:justify-between w-full gap-4 sm:gap-0">
               {TECH_PIPELINE.map(({ name, caption, iconType }, i) => (
                 <React.Fragment key={name}>
-                  <div className="flex items-center gap-2.5">
+                  <div className="flex items-center gap-2 sm:gap-2.5">
                     <div className="w-10 h-10 rounded-[11px] bg-[#F8FAFC] border border-[#EAECF0] flex items-center justify-center shrink-0">
                       <TechIcon type={iconType} />
                     </div>

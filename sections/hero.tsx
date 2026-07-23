@@ -244,7 +244,7 @@ export function Hero() {
   ];
 
   return (
-    <section className="relative w-full min-h-[95vh] overflow-hidden flex flex-col justify-between pt-[104px] pb-5 bg-background select-none">
+    <section className="relative w-full min-h-0 lg:min-h-[95vh] overflow-hidden flex flex-col justify-between pt-[72px] md:pt-[104px] pb-5 bg-background select-none">
 
       {/* ── Background texture ── */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.20]">
@@ -264,8 +264,8 @@ export function Hero() {
       </div>
 
       {/* ── Main content grid ── */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex-1 flex flex-col justify-center min-h-0">
-        <div className="grid grid-cols-1 lg:grid-cols-[48fr_52fr] gap-10 lg:gap-12 items-center py-4">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 flex-1 flex flex-col justify-center min-h-0">
+        <div className="grid grid-cols-1 lg:grid-cols-[48fr_52fr] gap-8 lg:gap-12 items-center py-4">
 
           {/* ─────────────────────────────────────────
              LEFT COLUMN — Bold Editorial Copy & CTAs
@@ -299,7 +299,7 @@ export function Hero() {
               transition={{ duration: 0.48, delay: 0.08 }}
               className="mb-4"
             >
-              <h1 className="font-heading font-black text-[#111111] leading-[0.88] tracking-tight text-[clamp(44px,4.8vw,66px)] uppercase">
+              <h1 className="font-heading font-black text-[#111111] leading-[0.88] tracking-tight text-[clamp(32px,4.8vw,66px)] uppercase">
                 <span className="block text-[#111111]">WE BUILD</span>
                 <span className="block text-primary">SOFTWARE</span>
                 <span className="relative inline-block text-[#111111] pb-1">
@@ -383,7 +383,7 @@ export function Hero() {
             <div className="relative w-full max-w-[610px] aspect-[1.38/1] select-none">
 
               {/* Dotted blueprint connectors */}
-              <svg className="absolute inset-0 w-full h-full pointer-events-none z-[12] opacity-[0.15]">
+              <svg className="absolute inset-0 w-full h-full pointer-events-none z-[12] opacity-[0.15] hidden lg:block">
                 <path d="M 110 50 Q 170 30 220 60" fill="none" stroke="#2457FF" strokeWidth="1.5" strokeDasharray="3 3" />
                 <path d="M 500 50 Q 440 30 390 60" fill="none" stroke="#2457FF" strokeWidth="1.5" strokeDasharray="3 3" />
                 <path d="M 100 360 Q 160 370 200 330" fill="none" stroke="#2457FF" strokeWidth="1.5" strokeDasharray="3 3" />
@@ -422,28 +422,28 @@ export function Hero() {
               {/* ── FLOATING CARDS ── */}
 
               {/* Card 1 — Founder Review (Top Left) */}
-              <Float className="left-[-4%] top-[2%]" rotate={-3} floatDelay={0.2} floatDuration={5.5} fadeDelay={0.35}>
+              <Float className="left-[-4%] top-[2%] hidden lg:block" rotate={-3} floatDelay={0.2} floatDuration={5.5} fadeDelay={0.35}>
                 <CardFounderReview />
               </Float>
 
               {/* Card 2 — GitHub Commit (Top Right) */}
-              <Float className="right-[-3%] top-[4%]" rotate={3} floatDelay={1.1} floatDuration={5.2} fadeDelay={0.45}>
+              <Float className="right-[-3%] top-[4%] hidden lg:block" rotate={3} floatDelay={1.1} floatDuration={5.2} fadeDelay={0.45}>
                 <CardGithubCommit />
               </Float>
 
               {/* Card 3 — Mobile Responsive Preview (Bottom Left) */}
-              <Float className="left-[-2%] bottom-[4%]" rotate={-2} floatDelay={0.7} floatDuration={5.8} fadeDelay={0.55}>
+              <Float className="left-[-2%] bottom-[4%] hidden lg:block" rotate={-2} floatDelay={0.7} floatDuration={5.8} fadeDelay={0.55}>
                 <CardMobileResponsive />
               </Float>
 
               {/* Card 4 — Lighthouse Score (Bottom Right) */}
-              <Float className="right-[-2%] bottom-[6%]" rotate={2} floatDelay={1.8} floatDuration={4.8} fadeDelay={0.65}>
+              <Float className="right-[-2%] bottom-[6%] hidden lg:block" rotate={2} floatDelay={1.8} floatDuration={4.8} fadeDelay={0.65}>
                 <CardLighthouseScore />
               </Float>
 
               {/* Editorial Doodles */}
-              <div className="absolute top-12 left-32 text-[#FFD43B] opacity-60 text-xs pointer-events-none">★</div>
-              <div className="absolute bottom-16 right-36 text-[#2457FF] opacity-40 text-xs pointer-events-none">✦</div>
+              <div className="absolute top-12 left-32 text-[#FFD43B] opacity-60 text-xs pointer-events-none hidden lg:block">★</div>
+              <div className="absolute bottom-16 right-36 text-[#2457FF] opacity-40 text-xs pointer-events-none hidden lg:block">✦</div>
 
             </div>
           </div>
@@ -455,7 +455,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.75 }}
-          className="shrink-0 mt-6 sm:mt-8 mb-4 border-[1.5px] border-[#222222] rounded-[16px] bg-transparent py-2.5 px-6 flex flex-col sm:flex-row items-center justify-between gap-4"
+          className="shrink-0 mt-6 sm:mt-8 mb-4 border-[1.5px] border-[#222222] rounded-[16px] bg-transparent py-2.5 px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4"
           style={{ boxShadow: "0 2px 14px rgba(17,17,17,0.04)" }}
         >
           <div className="shrink-0 text-center sm:text-left">

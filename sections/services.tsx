@@ -198,7 +198,7 @@ function FloatingCodeCard() {
 ───────────────────────────────────────── */
 export function Services() {
   return (
-    <section className="relative w-full h-[94vh] min-h-[640px] max-h-[960px] bg-background overflow-hidden flex flex-col justify-between py-5 select-none">
+    <section className="relative w-full bg-background overflow-hidden flex flex-col justify-between py-12 sm:py-16 lg:py-5 lg:h-[94vh] lg:min-h-[640px] lg:max-h-[960px] select-none">
 
       {/* Texture Background */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.14]">
@@ -215,7 +215,7 @@ export function Services() {
         <rect width="100%" height="100%" fill="url(#bpGridServices)" />
       </svg>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex-1 flex flex-col justify-center my-auto">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 flex-1 flex flex-col justify-center my-auto">
 
         {/* Two-Column Grid (Left ~40%, Right ~60%) */}
         <div className="grid grid-cols-1 lg:grid-cols-[40fr_60fr] gap-8 lg:gap-12 items-center">
@@ -280,7 +280,7 @@ export function Services() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.35, delay: 0.15 + index * 0.05 }}
                   whileHover={{ y: -6 }}
-                  className="h-[60px] sm:h-[62px] border-[1.5px] border-[#222222] rounded-[16px] bg-white hover:bg-[#F8FAFC] hover:border-primary transition-all duration-200 px-3.5 flex items-center justify-between cursor-pointer group shadow-sm select-none"
+                  className="h-auto min-h-[56px] sm:h-[62px] border-[1.5px] border-[#222222] rounded-[16px] bg-white hover:bg-[#F8FAFC] hover:border-primary transition-all duration-200 px-3 sm:px-3.5 py-2.5 sm:py-0 flex items-center justify-between cursor-pointer group shadow-sm select-none"
                   style={{ boxShadow: "1.5px 1.5px 0 rgba(17,17,17,0.04)" }}
                 >
                   <div className="flex items-center gap-3 overflow-hidden">
@@ -299,7 +299,7 @@ export function Services() {
                           {badge}
                         </span>
                       </div>
-                      <p className="font-sans text-[10.5px] text-[#6B6B6B] truncate max-w-[310px] font-normal">
+                      <p className="font-sans text-[10.5px] text-[#6B6B6B] truncate max-w-[200px] sm:max-w-[310px] font-normal">
                         {desc}
                       </p>
                     </div>
@@ -316,7 +316,7 @@ export function Services() {
           {/* ─────────────────────────────────────────
              RIGHT COLUMN — VISUAL HERO PRODUCT ECOSYSTEM SHOWCASE
           ───────────────────────────────────────── */}
-          <div className="relative w-full flex flex-col items-center justify-center min-h-[460px]">
+          <div className="relative w-full flex-col items-center justify-center min-h-[300px] sm:min-h-[460px] hidden lg:flex">
 
             {/* Top Right Security Badge — Secure & Scalable */}
             <motion.div
@@ -382,7 +382,7 @@ export function Services() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.35 }}
-              className="absolute bottom-10 left-[265px] z-20 bg-white border-[1.5px] border-[#222222] rounded-full px-3 py-1 font-sans text-[9.5px] font-extrabold text-[#111111] shadow-sm flex items-center gap-1.5 cursor-default"
+              className="absolute bottom-10 left-[40%] sm:left-[265px] z-20 bg-white border-[1.5px] border-[#222222] rounded-full px-3 py-1 font-sans text-[9.5px] font-extrabold text-[#111111] shadow-sm flex items-center gap-1.5 cursor-default hidden lg:flex"
               style={{ boxShadow: "1.5px 1.5px 0 rgba(17,17,17,0.04)" }}
             >
               <span className="w-2 h-2 rounded-full bg-[#22C55E] animate-pulse" />

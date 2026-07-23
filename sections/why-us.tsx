@@ -314,7 +314,7 @@ function RightProductSuiteShowcase() {
       {/* Top Left Pill */}
       <motion.div
         whileHover={{ y: -3, scale: 1.02 }}
-        className="absolute -top-4 -left-4 bg-[#FFD43B] border-[1.5px] border-[#222222] rounded-full px-3 py-1 shadow-md flex items-center gap-1.5 z-20 cursor-default"
+        className="absolute -top-4 -left-4 bg-[#FFD43B] border-[1.5px] border-[#222222] rounded-full px-3 py-1 shadow-md flex items-center gap-1.5 z-20 cursor-default hidden lg:flex"
       >
         <span className="font-sans font-black text-[9px] text-[#111111]">🎨 Figma → Production</span>
       </motion.div>
@@ -322,7 +322,7 @@ function RightProductSuiteShowcase() {
       {/* Top Right Pill */}
       <motion.div
         whileHover={{ y: -3, scale: 1.02 }}
-        className="absolute -top-4 -right-4 bg-white border-[1.5px] border-[#222222] rounded-full px-3 py-1 shadow-md flex items-center gap-1.5 z-20 cursor-default"
+        className="absolute -top-4 -right-4 bg-white border-[1.5px] border-[#222222] rounded-full px-3 py-1 shadow-md flex items-center gap-1.5 z-20 cursor-default hidden lg:flex"
       >
         <div className="flex text-[#FFD43B]">
           {[...Array(5)].map((_, i) => (
@@ -335,7 +335,7 @@ function RightProductSuiteShowcase() {
       {/* Bottom Left Pill */}
       <motion.div
         whileHover={{ y: 3, scale: 1.02 }}
-        className="absolute -bottom-4 -left-4 bg-white border-[1.5px] border-[#222222] rounded-full px-3 py-1 shadow-md flex items-center gap-1.5 z-20 cursor-default"
+        className="absolute -bottom-4 -left-4 bg-white border-[1.5px] border-[#222222] rounded-full px-3 py-1 shadow-md flex items-center gap-1.5 z-20 cursor-default hidden lg:flex"
       >
         <span className="w-2 h-2 rounded-full bg-[#22C55E]" />
         <span className="font-sans font-bold text-[9px] text-[#111111]">📱 100% Mobile Responsive</span>
@@ -344,7 +344,7 @@ function RightProductSuiteShowcase() {
       {/* Bottom Right Pill */}
       <motion.div
         whileHover={{ y: 3, scale: 1.02 }}
-        className="absolute -bottom-4 -right-4 bg-[#2457FF] border-[1.5px] border-[#222222] text-white rounded-full px-3 py-1 shadow-md flex items-center gap-1.5 z-20 cursor-default"
+        className="absolute -bottom-4 -right-4 bg-[#2457FF] border-[1.5px] border-[#222222] text-white rounded-full px-3 py-1 shadow-md flex items-center gap-1.5 z-20 cursor-default hidden lg:flex"
       >
         <span className="font-sans font-black text-[9px]">⚡ 98 Performance</span>
       </motion.div>
@@ -365,17 +365,17 @@ export function WhyUs() {
   ];
 
   return (
-    <section className="relative w-full bg-background overflow-hidden py-8 lg:py-10 min-h-[90vh] flex flex-col justify-center select-none">
+    <section className="relative w-full bg-background overflow-hidden py-12 sm:py-8 lg:py-10 min-h-0 lg:min-h-[90vh] flex flex-col justify-center select-none">
 
       {/* Texture Background */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.14]">
         <Image src="/images/hero/GWH_Background Texture.png" alt="" fill className="object-cover" />
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
 
         {/* 2-Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-[48fr_52fr] gap-8 lg:gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[48fr_52fr] gap-10 lg:gap-10 items-center">
 
           {/* ── LEFT COLUMN ── */}
           <div className="flex flex-col justify-center">
@@ -483,8 +483,7 @@ export function WhyUs() {
             </span>
           </div>
 
-          <div
-            className="bg-transparent border-[1.5px] border-[#222222] rounded-[14px] px-4 sm:px-6 py-2.5"
+          <div className="bg-transparent border-[1.5px] border-[#222222] rounded-[14px] px-3 sm:px-4 md:px-6 py-2.5"
             style={{ boxShadow: "2px 2px 0 rgba(17,17,17,0.04)" }}
           >
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-0 sm:divide-x sm:divide-[#222222]/15">

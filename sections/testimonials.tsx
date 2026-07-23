@@ -288,7 +288,7 @@ export function Testimonials() {
       {/* ══════════════════════════════
           MASTER CONTAINER (1280px)
       ══════════════════════════════ */}
-      <div className="relative z-10 w-full max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-10 flex flex-col gap-10 lg:gap-12">
+      <div className="relative z-10 w-full max-w-[1280px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 flex flex-col gap-8 lg:gap-12">
 
         {/* ───────────────────────────────────
             ROW 1: 2-COLUMN LAYOUT
@@ -329,7 +329,7 @@ export function Testimonials() {
             </p>
 
             {/* Single subtle dotted curved arrow */}
-            <div className="pt-2 pl-1 opacity-40">
+            <div className="pt-2 pl-1 opacity-40 hidden lg:block">
               <svg className="w-12 h-10 text-primary" viewBox="0 0 60 50" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="3 3">
                 <path d="M 10 10 Q 25 40 50 35" />
                 <path d="M 42 27 L 50 35 L 42 42" strokeDasharray="none" />

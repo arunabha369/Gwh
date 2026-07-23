@@ -9,7 +9,7 @@ export function Footer() {
   return (
     <footer className="w-full bg-[#FBF7EF] border-t border-[#EAE4D8] text-[#111] select-none">
       {/* ── Main Container (1280px) ── */}
-      <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-10 py-10 lg:py-12 flex flex-col gap-10">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-8 lg:py-12 flex flex-col gap-8 sm:gap-10">
 
         {/* ── TOP SECTION (Left, Middle, Right) ── */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-6">
