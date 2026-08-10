@@ -9,12 +9,6 @@ import {
   Shield,
   MessageCircle,
   TrendingUp,
-  Star,
-  CheckCircle2,
-  Bot,
-  Code2,
-  Gauge,
-  Sparkles,
 } from "lucide-react";
 
 /* ─────────────────────────────────────────
@@ -94,266 +88,6 @@ function FeatureCard({
 }
 
 /* ─────────────────────────────────────────
-   PREMIUM EDITORIAL PRODUCT SHOWCASE (RIGHT COLUMN)
-───────────────────────────────────────── */
-function RightProductSuiteShowcase() {
-  const [activeTab, setActiveTab] = React.useState<"ai" | "stack" | "perf">("ai");
-
-  return (
-    <div className="relative w-full max-w-[500px] select-none">
-
-      {/* Main Glass Workspace Window */}
-      <div
-        className="bg-white border-[2px] border-[#222222] rounded-[20px] overflow-hidden shadow-[0_20px_45px_rgba(0,0,0,0.08)] relative"
-        style={{ boxShadow: "4px 4px 0 rgba(17,17,17,0.08)" }}
-      >
-        {/* Window Chrome Header */}
-        <div className="flex items-center justify-between px-4 py-3 bg-[#F5F5F7] border-b border-[#E2E4E9]">
-          <div className="flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full bg-[#FF5F57] border border-[#E0443E]" />
-            <span className="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]" />
-            <span className="w-3 h-3 rounded-full bg-[#28C840] border border-[#1AAB29]" />
-            <div className="ml-3 px-3 py-1 bg-white border border-[#E2E4E9] rounded-full flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E] animate-pulse" />
-              <span className="font-mono text-[9px] font-bold text-[#374151]">growwithhustler.com/os</span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <span className="px-2 py-0.5 bg-[#DEF7EC] text-[#03543F] text-[8px] font-bold rounded-full border border-[#BEE3F8]/30 flex items-center gap-1">
-              <span className="w-1 h-1 rounded-full bg-[#22C55E]" />
-              Production Ready
-            </span>
-          </div>
-        </div>
-
-        {/* Tab Selector Header */}
-        <div className="flex items-center justify-around px-2 py-2 bg-[#FAFBFD] border-b border-[#EAEAEA]">
-          <button
-            onClick={() => setActiveTab("ai")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-extrabold transition-all ${
-              activeTab === "ai"
-                ? "bg-[#2457FF] text-white shadow-sm"
-                : "text-[#6B6B6B] hover:text-[#111111] hover:bg-black/5"
-            }`}
-          >
-            <Bot className="w-3 h-3" />
-            <span>AI Agents</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab("stack")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-extrabold transition-all ${
-              activeTab === "stack"
-                ? "bg-[#2457FF] text-white shadow-sm"
-                : "text-[#6B6B6B] hover:text-[#111111] hover:bg-black/5"
-            }`}
-          >
-            <Code2 className="w-3 h-3" />
-            <span>Modern Stack</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab("perf")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-extrabold transition-all ${
-              activeTab === "perf"
-                ? "bg-[#2457FF] text-white shadow-sm"
-                : "text-[#6B6B6B] hover:text-[#111111] hover:bg-black/5"
-            }`}
-          >
-            <Gauge className="w-3 h-3" />
-            <span>Performance</span>
-          </button>
-        </div>
-
-        {/* Dynamic Tab Body */}
-        <div className="p-4 sm:p-5 bg-white min-h-[220px] flex flex-col justify-between">
-
-          {/* TAB 1: AI AGENTS */}
-          {activeTab === "ai" && (
-            <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }} className="space-y-3">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h4 className="font-heading font-black text-[13px] text-[#111111]">Autonomous AI Pipeline</h4>
-                  <p className="font-sans text-[9.5px] text-[#6B6B6B]">Built directly into client applications</p>
-                </div>
-                <span className="px-2 py-0.5 bg-[#EEF2FF] text-[#2457FF] text-[8.5px] font-black rounded-md border border-[#2457FF]/20">
-                  OpenAI v4 + Supabase
-                </span>
-              </div>
-
-              <div className="space-y-2">
-                <div className="p-2.5 rounded-xl border border-[#E5E7EB] bg-[#F8FAFC] flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-6 h-6 rounded-lg bg-[#2457FF] text-white flex items-center justify-center font-bold text-[10px]">
-                      🤖
-                    </div>
-                    <div>
-                      <p className="font-sans font-bold text-[10px] text-[#111111]">Lead Gen AI Bot</p>
-                      <p className="font-sans text-[8.5px] text-[#6B6B6B]">Auto captures &amp; qualifies inbound leads</p>
-                    </div>
-                  </div>
-                  <span className="px-2 py-0.5 bg-[#DEF7EC] text-[#03543F] text-[8px] font-bold rounded-full">
-                    Active
-                  </span>
-                </div>
-
-                <div className="p-2.5 rounded-xl border border-[#E5E7EB] bg-[#F8FAFC] flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-6 h-6 rounded-lg bg-[#111111] text-white flex items-center justify-center font-bold text-[10px]">
-                      ⚡
-                    </div>
-                    <div>
-                      <p className="font-sans font-bold text-[10px] text-[#111111]">Auto Code Auditor</p>
-                      <p className="font-sans text-[8.5px] text-[#6B6B6B]">Runs static type safety &amp; security checks</p>
-                    </div>
-                  </div>
-                  <span className="px-2 py-0.5 bg-[#EEF2FF] text-[#2457FF] text-[8px] font-bold rounded-full">
-                    Running
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          )}
-
-          {/* TAB 2: MODERN STACK */}
-          {activeTab === "stack" && (
-            <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }} className="space-y-3">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h4 className="font-heading font-black text-[13px] text-[#111111]">Battle-Tested Architecture</h4>
-                  <p className="font-sans text-[9.5px] text-[#6B6B6B]">Scalable, production-ready tech stack</p>
-                </div>
-                <span className="px-2 py-0.5 bg-[#FFD43B] text-[#111111] text-[8.5px] font-black rounded-md border border-[#222222]">
-                  100% Clean Code
-                </span>
-              </div>
-
-              <div className="grid grid-cols-2 gap-2">
-                <div className="p-2.5 rounded-xl border border-[#E5E7EB] bg-[#F8FAFC] space-y-1">
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-[9px] font-bold text-[#111111]">Next.js 14 App Router</span>
-                    <CheckCircle2 className="w-3 h-3 text-[#2457FF]" />
-                  </div>
-                  <p className="font-sans text-[8px] text-[#6B6B6B]">Server Components &amp; Edge API</p>
-                </div>
-
-                <div className="p-2.5 rounded-xl border border-[#E5E7EB] bg-[#F8FAFC] space-y-1">
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-[9px] font-bold text-[#111111]">Supabase PostgreSQL</span>
-                    <CheckCircle2 className="w-3 h-3 text-[#2457FF]" />
-                  </div>
-                  <p className="font-sans text-[8px] text-[#6B6B6B]">Row Level Security &amp; Auth</p>
-                </div>
-
-                <div className="p-2.5 rounded-xl border border-[#E5E7EB] bg-[#F8FAFC] space-y-1">
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-[9px] font-bold text-[#111111]">TypeScript Strict</span>
-                    <CheckCircle2 className="w-3 h-3 text-[#2457FF]" />
-                  </div>
-                  <p className="font-sans text-[8px] text-[#6B6B6B]">Zero runtime type errors</p>
-                </div>
-
-                <div className="p-2.5 rounded-xl border border-[#E5E7EB] bg-[#F8FAFC] space-y-1">
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-[9px] font-bold text-[#111111]">Tailwind CSS</span>
-                    <CheckCircle2 className="w-3 h-3 text-[#2457FF]" />
-                  </div>
-                  <p className="font-sans text-[8px] text-[#6B6B6B]">Custom editorial design system</p>
-                </div>
-              </div>
-            </motion.div>
-          )}
-
-          {/* TAB 3: PERFORMANCE */}
-          {activeTab === "perf" && (
-            <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }} className="space-y-3">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h4 className="font-heading font-black text-[13px] text-[#111111]">Blazing Fast Core Web Vitals</h4>
-                  <p className="font-sans text-[9.5px] text-[#6B6B6B]">Optimized for SEO &amp; conversion</p>
-                </div>
-                <span className="px-2 py-0.5 bg-[#DEF7EC] text-[#03543F] text-[8.5px] font-black rounded-md">
-                  Vercel Edge Network
-                </span>
-              </div>
-
-              <div className="grid grid-cols-3 gap-2 text-center">
-                <div className="p-2.5 rounded-xl border border-[#E5E7EB] bg-[#F8FAFC]">
-                  <p className="font-heading font-black text-[18px] text-[#22C55E]">98</p>
-                  <p className="font-sans font-bold text-[8.5px] text-[#111111]">Performance</p>
-                </div>
-
-                <div className="p-2.5 rounded-xl border border-[#E5E7EB] bg-[#F8FAFC]">
-                  <p className="font-heading font-black text-[18px] text-[#2457FF]">100</p>
-                  <p className="font-sans font-bold text-[8.5px] text-[#111111]">SEO</p>
-                </div>
-
-                <div className="p-2.5 rounded-xl border border-[#E5E7EB] bg-[#F8FAFC]">
-                  <p className="font-heading font-black text-[18px] text-[#111111]">&lt;40ms</p>
-                  <p className="font-sans font-bold text-[8.5px] text-[#111111]">Latency</p>
-                </div>
-              </div>
-            </motion.div>
-          )}
-
-          {/* Bottom Bar */}
-          <div className="flex items-center justify-between pt-3 mt-3 border-t border-[#F0F0F0]">
-            <div className="flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-primary" />
-              <span className="font-sans font-bold text-[9.5px] text-[#111111]">Shipped to Real Users</span>
-            </div>
-            <span className="font-mono text-[9px] text-[#6B6B6B]">Weekly Syncs &amp; Async Demos</span>
-          </div>
-
-        </div>
-      </div>
-
-      {/* ── 4 ELEGANT CORNER PROOF PILLS (NO LINES) ── */}
-
-      {/* Top Left Pill */}
-      <motion.div
-        whileHover={{ y: -3, scale: 1.02 }}
-        className="absolute -top-4 -left-4 bg-[#FFD43B] border-[1.5px] border-[#222222] rounded-full px-3 py-1 shadow-md flex items-center gap-1.5 z-20 cursor-default"
-      >
-        <span className="font-sans font-black text-[9px] text-[#111111]">🎨 Figma → Production</span>
-      </motion.div>
-
-      {/* Top Right Pill */}
-      <motion.div
-        whileHover={{ y: -3, scale: 1.02 }}
-        className="absolute -top-4 -right-4 bg-white border-[1.5px] border-[#222222] rounded-full px-3 py-1 shadow-md flex items-center gap-1.5 z-20 cursor-default"
-      >
-        <div className="flex text-[#FFD43B]">
-          {[...Array(5)].map((_, i) => (
-            <Star key={i} className="w-2.5 h-2.5 fill-[#FFD43B] stroke-none" />
-          ))}
-        </div>
-        <span className="font-sans font-bold text-[9px] text-[#111111]">Founder Approved</span>
-      </motion.div>
-
-      {/* Bottom Left Pill */}
-      <motion.div
-        whileHover={{ y: 3, scale: 1.02 }}
-        className="absolute -bottom-4 -left-4 bg-white border-[1.5px] border-[#222222] rounded-full px-3 py-1 shadow-md flex items-center gap-1.5 z-20 cursor-default"
-      >
-        <span className="w-2 h-2 rounded-full bg-[#22C55E]" />
-        <span className="font-sans font-bold text-[9px] text-[#111111]">📱 100% Mobile Responsive</span>
-      </motion.div>
-
-      {/* Bottom Right Pill */}
-      <motion.div
-        whileHover={{ y: 3, scale: 1.02 }}
-        className="absolute -bottom-4 -right-4 bg-[#2457FF] border-[1.5px] border-[#222222] text-white rounded-full px-3 py-1 shadow-md flex items-center gap-1.5 z-20 cursor-default"
-      >
-        <span className="font-sans font-black text-[9px]">⚡ 98 Performance</span>
-      </motion.div>
-
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────
    MAIN WHY US SECTION
 ───────────────────────────────────────── */
 export function WhyUs() {
@@ -365,20 +99,20 @@ export function WhyUs() {
   ];
 
   return (
-    <section className="relative w-full bg-background overflow-hidden py-8 lg:py-10 min-h-[90vh] flex flex-col justify-center select-none">
+    <section className="relative w-full bg-background overflow-hidden py-10 lg:py-12 min-h-[90vh] flex flex-col justify-center select-none">
 
       {/* Texture Background */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.14]">
-        <Image src="/images/hero/GWH_Background Texture.png" alt="" fill className="object-cover" />
+        <Image src="/images/hero/GWH_Background Texture.png" alt="" fill className="object-cover" priority />
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+      <div className="relative z-10 w-full max-w-[1360px] mx-auto px-5 sm:px-8 lg:px-12">
 
         {/* 2-Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-[48fr_52fr] gap-8 lg:gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[42fr_58fr] gap-6 lg:gap-8 xl:gap-10 items-center">
 
           {/* ── LEFT COLUMN ── */}
-          <div className="flex flex-col justify-center">
+          <div className="flex flex-col justify-center max-w-[530px]">
 
             {/* Badge */}
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} custom={0} className="mb-2.5">
@@ -412,7 +146,7 @@ export function WhyUs() {
             </motion.div>
 
             {/* Paragraph */}
-            <motion.p initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} custom={0.14} className="font-sans text-[13px] text-[#6B6B6B] leading-relaxed mb-4 max-w-[420px]">
+            <motion.p initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} custom={0.14} className="font-sans text-[13px] text-[#6B6B6B] leading-relaxed mb-4 max-w-[440px]">
               We partner with founders to{" "}
               <span className="text-primary font-bold">build</span>,{" "}
               <span className="text-primary font-bold">ship</span> and{" "}
@@ -460,10 +194,27 @@ export function WhyUs() {
 
           </div>
 
-          {/* ── RIGHT COLUMN — PREMIUM INTERACTIVE PRODUCT SHOWCASE ── */}
-          <div className="w-full flex items-center justify-center">
-            <RightProductSuiteShowcase />
-          </div>
+          {/* ── RIGHT COLUMN — HIGH-RES DASHBOARD ECOSYSTEM ILLUSTRATION ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, ease: [0.215, 0.61, 0.355, 1] }}
+            whileHover={{ y: -4 }}
+            className="w-full flex items-center justify-center relative py-1"
+          >
+            <div className="relative w-full max-w-[540px] lg:max-w-[600px] xl:max-w-[640px] aspect-square select-none drop-shadow-[0_20px_35px_rgba(0,0,0,0.08)]">
+              <Image
+                src="/images/why-us/why_us_dashboard_transparent.png"
+                alt="Grow With Hustler Product & Tech Dashboard"
+                fill
+                unoptimized
+                quality={100}
+                className="object-contain"
+                priority
+              />
+            </div>
+          </motion.div>
 
         </div>
 
@@ -484,13 +235,13 @@ export function WhyUs() {
           </div>
 
           <div
-            className="bg-transparent border-[1.5px] border-[#222222] rounded-[14px] px-4 sm:px-6 py-2.5"
+            className="bg-transparent border-[1.5px] border-[#222222] rounded-[14px] px-4 sm:px-6 py-3 sm:py-2.5"
             style={{ boxShadow: "2px 2px 0 rgba(17,17,17,0.04)" }}
           >
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-0 sm:divide-x sm:divide-[#222222]/15">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-y-3 gap-x-4 sm:gap-0 sm:divide-x sm:divide-[#222222]/15">
               {benefits.map(({ Icon, stat, label }) => (
-                <div key={label} className="flex items-center justify-center gap-2.5 sm:px-3 first:pl-0 last:pr-0">
-                  <div className="w-7 h-7 rounded-full border border-[#222222] bg-transparent flex items-center justify-center shrink-0">
+                <div key={label} className="flex items-start sm:items-center gap-2.5 sm:justify-center sm:px-3 sm:first:pl-0 sm:last:pr-0">
+                  <div className="w-7 h-7 rounded-full border border-[#222222] bg-transparent flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
                     <Icon className="text-primary" style={{ width: 13, height: 13 }} />
                   </div>
                   <div>

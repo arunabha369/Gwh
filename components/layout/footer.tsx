@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+
 
 export function Footer() {
   return (
@@ -38,15 +38,7 @@ export function Footer() {
             >
               growwithhustler@gmail.com
             </a>
-            <a
-              href="https://cal.com"
-              target="_blank"
-              rel="noreferrer"
-              className="h-[44px] px-5 rounded-full bg-[#FFD43B] border-[1.5px] border-[#111] text-[#111] font-heading font-bold text-[13px] flex items-center gap-2 shadow-2xs hover:shadow-md transition-all duration-200"
-            >
-              Book Discovery Call
-              <ArrowRight className="w-3.5 h-3.5 text-[#111]" strokeWidth={2.2} />
-            </a>
+
           </div>
 
         </div>

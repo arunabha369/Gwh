@@ -14,6 +14,8 @@ import {
   ShieldCheck,
   CheckCircle2,
 } from "lucide-react";
+import { MacbookPro } from "@/components/ui/macbook-pro";
+import { Iphone15Pro } from "@/components/ui/iphone-15-pro";
 
 /* ─────────────────────────────────────────
    6 SERVICE DEFINITIONS WITH FEATURE BADGES
@@ -64,49 +66,12 @@ const SERVICES = [
 ];
 
 /* ─────────────────────────────────────────
-   1. MAIN HERO LAPTOP (PUBLIC WEBSITE MOCKUP)
-───────────────────────────────────────── */
-function MacBookMockup() {
-  return (
-    <div className="relative w-full max-w-[570px] mx-auto select-none">
-      {/* Outer Aluminum Display Shell */}
-      <div className="relative bg-[#1E1E24] rounded-t-[18px] p-[9px] pb-[12px] border-[2px] border-[#222222] shadow-2xl">
-        {/* Camera Notch Dot */}
-        <div className="absolute top-[5px] left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#0D0D11] border border-[#333333] z-20 flex items-center justify-center">
-          <span className="w-0.5 h-0.5 rounded-full bg-[#1A5276]" />
-        </div>
-
-        {/* Screen Display Container */}
-        <div className="relative w-full aspect-[1.76/1] bg-[#0A0D14] rounded-[10px] overflow-hidden border border-[#333333]">
-          <Image
-            src="/swapno-fe.png"
-            alt="Swapno Motors Public Website"
-            fill
-            className="object-cover object-top"
-            priority
-          />
-        </div>
-      </div>
-
-      {/* MacBook Bottom Base / Keyboard Lip */}
-      <div className="relative w-[108%] -left-[4%] h-[14px] bg-gradient-to-b from-[#E2E8F0] via-[#CBD5E1] to-[#94A3B8] rounded-b-[14px] border-x-[2px] border-b-[2px] border-[#222222] flex justify-center items-center">
-        {/* Thumb Opening Indentation */}
-        <div className="w-[12%] h-[4px] bg-[#64748B] rounded-b-[4px] border-t border-[#475569]" />
-      </div>
-
-      {/* Soft Ground Elevation Shadow */}
-      <div className="w-[92%] h-[14px] mx-auto bg-black/25 rounded-full blur-md mt-1 pointer-events-none" />
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────
-   2. SMALL FLOATING WINDOW (ADMIN DASHBOARD MOCKUP)
+   FLOATING ADMIN DASHBOARD WINDOW MOCKUP
 ───────────────────────────────────────── */
 function FloatingAdminDashboard() {
   return (
     <div
-      className="w-[205px] sm:w-[225px] aspect-[1.55/1] bg-[#0F172A] border-[1.5px] border-[#222222] rounded-[14px] overflow-hidden shadow-2xl select-none"
+      className="w-[195px] sm:w-[215px] aspect-[1.55/1] bg-[#0F172A] border-[1.5px] border-[#222222] rounded-[14px] overflow-hidden shadow-2xl select-none"
       style={{ boxShadow: "0 14px 32px rgba(0,0,0,0.25)" }}
     >
       {/* Mac Chrome Header Bar */}
@@ -137,37 +102,11 @@ function FloatingAdminDashboard() {
 }
 
 /* ─────────────────────────────────────────
-   3. REALISTIC MOBILE PHONE MOCKUP
-───────────────────────────────────────── */
-function MobilePhoneMockup() {
-  return (
-    <div className="relative w-[122px] sm:w-[132px] h-[235px] sm:h-[255px] select-none shadow-2xl">
-      {/* Outer Phone Shell */}
-      <div className="relative w-full h-full bg-[#111115] border-[2px] border-[#222222] rounded-[26px] p-2 shadow-2xl flex flex-col">
-        {/* Top Speaker Ear Piece */}
-        <div className="w-8 h-1 bg-[#222225] rounded-full mx-auto mb-1.5 shrink-0" />
-
-        {/* Mobile Screen Display Container */}
-        <div className="relative flex-1 w-full bg-[#090D16] rounded-[18px] overflow-hidden border border-[#222225]">
-          <Image
-            src="/swapno-fe-mobile.png"
-            alt="Swapno Motors Mobile Frontend"
-            fill
-            className="object-cover object-top"
-            priority
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────
-   4. FLOATING DARK TERMINAL CODE CARD
+   FLOATING CODE TERMINAL CARD
 ───────────────────────────────────────── */
 function FloatingCodeCard() {
   return (
-    <div className="bg-[#0F172A] border-[1.5px] border-[#222222] rounded-[16px] p-3 text-white shadow-xl max-w-[235px] select-none">
+    <div className="bg-[#0F172A] border-[1.5px] border-[#222222] rounded-[16px] p-3 text-white shadow-xl max-w-[225px] select-none">
       {/* Mac Window Controls */}
       <div className="flex items-center justify-between mb-2 border-b border-[#ffffff15] pb-1.5">
         <div className="flex items-center gap-1.5">
@@ -198,7 +137,7 @@ function FloatingCodeCard() {
 ───────────────────────────────────────── */
 export function Services() {
   return (
-    <section className="relative w-full h-[94vh] min-h-[640px] max-h-[960px] bg-background overflow-hidden flex flex-col justify-between py-5 select-none">
+    <section className="relative w-full min-h-[90vh] bg-background overflow-hidden flex flex-col justify-between py-8 sm:py-10 select-none">
 
       {/* Texture Background */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.14]">
@@ -215,7 +154,7 @@ export function Services() {
         <rect width="100%" height="100%" fill="url(#bpGridServices)" />
       </svg>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex-1 flex flex-col justify-center my-auto">
+      <div className="relative z-10 w-full max-w-[1360px] mx-auto px-5 sm:px-8 lg:px-12 flex-1 flex flex-col justify-center my-auto">
 
         {/* Two-Column Grid (Left ~40%, Right ~60%) */}
         <div className="grid grid-cols-1 lg:grid-cols-[40fr_60fr] gap-8 lg:gap-12 items-center">
@@ -314,9 +253,9 @@ export function Services() {
           </div>
 
           {/* ─────────────────────────────────────────
-             RIGHT COLUMN — VISUAL HERO PRODUCT ECOSYSTEM SHOWCASE
+             RIGHT COLUMN — 21st.dev MACBOOK PRO + IPHONE MOCKUP COMPOSITION
           ───────────────────────────────────────── */}
-          <div className="relative w-full flex flex-col items-center justify-center min-h-[460px]">
+          <div className="relative w-full hidden lg:flex flex-col items-center justify-center min-h-[460px] lg:min-h-[500px]">
 
             {/* Top Right Security Badge — Secure & Scalable */}
             <motion.div
@@ -335,34 +274,34 @@ export function Services() {
             {/* Hand-drawn Star Doodle Top Right */}
             <div className="absolute top-0 right-0 text-[#FFD43B] text-sm pointer-events-none opacity-80">★</div>
 
-            {/* ── 1. MAIN HERO OBJECT: LAPTOP MOCKUP (PUBLIC WEBSITE) ── */}
+            {/* ── 1. PRIMARY DEVICE: 21st.dev MACBOOK PRO MOCKUP (designali-in/macbook-pro) ── */}
             <motion.div
-              animate={{ y: [0, -3, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="relative z-10 w-full max-w-[560px]"
+              animate={{ y: [0, -4, 0] }}
+              transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
+              className="relative z-10 w-full max-w-[590px] lg:max-w-[640px]"
             >
-              <MacBookMockup />
+              <MacbookPro src="/swapno-fe.png" />
             </motion.div>
 
-            {/* ── 2. FLOATING SMALL ADMIN DASHBOARD WINDOW (TOP RIGHT OVERLAP 8°) ── */}
+            {/* ── 2. SECONDARY DEVICE: 21st.dev IPHONE 15 PRO MOCKUP (dillionverma/iphone-15-pro) ── */}
+            <motion.div
+              animate={{ y: [0, 4, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+              className="absolute -bottom-2 right-0 sm:right-2 z-20 w-[130px] sm:w-[145px] lg:w-[155px]"
+            >
+              <Iphone15Pro src="/swapno-fe-mobile.png" />
+            </motion.div>
+
+            {/* ── 3. FLOATING SMALL ADMIN DASHBOARD WINDOW (TOP RIGHT OVERLAP 8°) ── */}
             <motion.div
               initial={{ opacity: 0, y: -10, rotate: 6 }}
               whileInView={{ opacity: 1, y: 0, rotate: 8 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.25 }}
               whileHover={{ rotate: 4, scale: 1.02 }}
-              className="absolute -top-3 right-0 z-20"
+              className="absolute -top-4 right-2 z-20 hidden sm:block"
             >
               <FloatingAdminDashboard />
-            </motion.div>
-
-            {/* ── 3. MOBILE PHONE MOCKUP (BOTTOM RIGHT OVERLAP 18%) ── */}
-            <motion.div
-              animate={{ y: [0, 3, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-              className="absolute bottom-3 right-1 z-20"
-            >
-              <MobilePhoneMockup />
             </motion.div>
 
             {/* ── 4. FLOATING DARK TERMINAL CODE CARD (BOTTOM LEFT) ── */}
@@ -371,7 +310,7 @@ export function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.3 }}
-              className="absolute bottom-5 left-0 z-20"
+              className="absolute -bottom-3 left-0 z-20 hidden sm:block"
             >
               <FloatingCodeCard />
             </motion.div>
@@ -382,7 +321,7 @@ export function Services() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.35 }}
-              className="absolute bottom-10 left-[265px] z-20 bg-white border-[1.5px] border-[#222222] rounded-full px-3 py-1 font-sans text-[9.5px] font-extrabold text-[#111111] shadow-sm flex items-center gap-1.5 cursor-default"
+              className="absolute bottom-6 left-[250px] z-20 bg-white border-[1.5px] border-[#222222] rounded-full px-3 py-1 font-sans text-[9.5px] font-extrabold text-[#111111] shadow-sm hidden md:flex items-center gap-1.5 cursor-default"
               style={{ boxShadow: "1.5px 1.5px 0 rgba(17,17,17,0.04)" }}
             >
               <span className="w-2 h-2 rounded-full bg-[#22C55E] animate-pulse" />
@@ -395,7 +334,7 @@ export function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.4 }}
-              className="absolute bottom-0 right-20 z-20 bg-white border-[1.5px] border-[#222222] rounded-full px-3.5 py-1 font-sans text-[9.5px] font-extrabold text-[#111111] shadow-sm flex items-center gap-1.5 cursor-default"
+              className="absolute -bottom-6 right-16 z-20 bg-white border-[1.5px] border-[#222222] rounded-full px-3.5 py-1 font-sans text-[9.5px] font-extrabold text-[#111111] shadow-sm hidden md:flex items-center gap-1.5 cursor-default"
               style={{ boxShadow: "1.5px 1.5px 0 rgba(17,17,17,0.04)" }}
             >
               <div className="w-3.5 h-3.5 rounded-full bg-[#111111] text-white flex items-center justify-center font-black text-[7px]">N</div>

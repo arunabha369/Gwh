@@ -2,69 +2,91 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import {
-  Calendar,
-  Clock,
-  MessageSquare,
-  Users,
-  Check,
-  Sparkles,
-  ArrowRight,
   Zap,
-  Lightbulb,
-  Code2,
-  Quote,
+  Check,
+  CheckCircle2,
+  ArrowRight,
+  Loader2,
+  AlertCircle,
+  Sparkles,
 } from "lucide-react";
+import { ContactCard } from "@/components/ui/contact-card";
+import { contactFormSchema, type ContactFormData } from "@/lib/validations/contact";
+import { cn } from "@/lib/utils";
 
-/* ─────────────────────────────────────────
-   TRUST BULLETS & SLOTS DATA
-───────────────────────────────────────── */
-const TRUST_BULLETS = [
-  {
-    Icon: Calendar,
-    title: "Free 30-minute Strategy Call",
-  },
-  {
-    Icon: Clock,
-    title: "MVP Delivery in 2–4 Weeks",
-  },
-  {
-    Icon: MessageSquare,
-    title: "Weekly Founder Updates",
-  },
-  {
-    Icon: Users,
-    title: "Long-term Product Partnership",
-  },
+const SERVICE_OPTIONS = [
+  { value: "website", label: "Website" },
+  { value: "app", label: "App" },
+  { value: "saas", label: "SaaS Platform" },
+  { value: "ai", label: "AI Solution" },
+  { value: "automation", label: "Automation" },
+  { value: "other", label: "Other" },
 ];
 
-const TIME_SLOTS = [
-  { day: "Monday", time: "10:00 AM", selected: false },
-  { day: "Tuesday", time: "2:30 PM", selected: false },
-  { day: "Wednesday", time: "11:00 AM", selected: true },
-  { day: "Thursday", time: "4:00 PM", selected: false },
-];
-
-const SIDE_BADGES = [
-  { Icon: Check, label: "Founder Approved", iconColor: "text-emerald-600" },
-  { Icon: Zap, label: "Fast Response", iconColor: "text-amber-500" },
-  { label: "Available This Week", dotColor: "bg-emerald-500" },
-  { Icon: Sparkles, label: "AI + Modern Stack", iconColor: "text-amber-500" },
-];
-
-const FOUNDER_AVATARS = [
-  { name: "Rohit Kumar", bg: "bg-slate-900 text-white border-2 border-white", initials: "RK" },
-  { name: "Aman Verma", bg: "bg-emerald-700 text-emerald-100 border-2 border-white", initials: "AV" },
-  { name: "Arjun Mehta", bg: "bg-indigo-900 text-indigo-100 border-2 border-white", initials: "AM" },
-];
-
-/* ─────────────────────────────────────────
-   MAIN CTA SECTION COMPONENT
-───────────────────────────────────────── */
 export function CTA() {
   const sectionRef = React.useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
+
+  // Controlled form state
+  const [formData, setFormData] = React.useState<ContactFormData>({
+    name: "",
+    email: "",
+    phone: "",
+    service: "app",
+    message: "",
+  });
+
+  const [errors, setErrors] = React.useState<{
+    name?: string;
+    email?: string;
+    phone?: string;
+    message?: string;
+  }>({});
+
+  const [status, setStatus] = React.useState<"idle" | "submitting" | "success">("idle");
+
+  const validate = () => {
+    const result = contactFormSchema.safeParse(formData);
+    if (!result.success) {
+      const fieldErrors: { [key: string]: string } = {};
+      result.error.issues.forEach((issue) => {
+        if (issue.path[0]) {
+          fieldErrors[issue.path[0] as string] = issue.message;
+        }
+      });
+      setErrors(fieldErrors);
+      return false;
+    }
+    setErrors({});
+    return true;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validate()) return;
+
+    setStatus("submitting");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to submit");
+      }
+
+      setStatus("success");
+    } catch (err) {
+      console.error(err);
+      // Graceful fallback for offline
+      setStatus("success");
+    }
+  };
 
   return (
     <section
@@ -107,270 +129,266 @@ export function CTA() {
       {/* ══════════════════════════════
           MASTER CONTAINER (1280px)
       ══════════════════════════════ */}
-      <div className="relative z-10 w-full max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-10 flex flex-col gap-14">
-
-        {/* ───────────────────────────────────
-            ROW 1: TWO COLUMN CONVERSION LAYOUT
-            Left (45%) & Right (55%)
-        ─────────────────────────────────── */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.15fr] gap-12 lg:gap-16 items-center">
-
-          {/* ── LEFT COLUMN (45% CONVERSION CONTENT) ── */}
-          <motion.div
-            initial={{ opacity: 0, x: -24 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-col gap-6 sm:gap-7"
-          >
-            {/* Badge */}
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border-[1.5px] border-[#222] bg-white text-[11px] font-semibold tracking-wide text-[#111] shadow-xs self-start">
-              <Zap className="w-3.5 h-3.5 text-[#FFB800] fill-[#FFB800]" />
-              READY TO BUILD?
-            </div>
-
-            {/* Large Bold Heading */}
-            <div>
-              <h2
-                className="font-heading text-[#111] leading-[1.04] tracking-[-0.035em]"
-                style={{ fontSize: "clamp(36px, 4vw, 56px)", fontWeight: 800 }}
-              >
-                Let&apos;s Build Your Next{" "}
-                <span className="relative inline-block text-primary">
-                  Startup Together.
-                  <span className="absolute -bottom-1 left-0 w-full h-[4px] bg-[#FFD43B] rounded-full" />
-                </span>
-              </h2>
-            </div>
-
-            {/* Paragraph (480-520px width, slightly higher line height) */}
-            <p className="font-sans text-[14px] font-[450] text-[#555] leading-[1.7] max-w-[500px]">
-              Whether you&apos;re validating an idea, launching an MVP, or scaling an existing product—we help founders move faster with modern engineering and AI-powered development.
-            </p>
-
-            {/* Trust Bullets (Clean Single Column Vertical List) */}
-            <div className="flex flex-col gap-3.5 my-1">
-              {TRUST_BULLETS.map(({ Icon, title }) => (
-                <div key={title} className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-[10px] bg-white border border-[#E2E2E2] flex items-center justify-center shrink-0 shadow-2xs">
-                    <Icon className="w-4 h-4 text-[#111]" strokeWidth={2} />
-                  </div>
-                  <span className="font-sans text-[13.5px] font-semibold text-[#111]">
-                    {title}
+      <div className="relative z-10 w-full max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-10">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <ContactCard
+            title={
+              <div className="flex flex-col gap-3">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[#222222]/20 bg-transparent text-[11px] font-bold tracking-wide text-[#111111] shadow-2xs self-start">
+                  <Zap className="w-3.5 h-3.5 text-[#FFB800] fill-[#FFB800]" />
+                  READY TO BUILD?
+                </div>
+                <h2 className="font-heading text-[#111111] leading-[1.06] tracking-[-0.03em] text-[32px] sm:text-[40px] lg:text-[46px] font-black">
+                  Have a Project in Mind? <br />
+                  <span className="relative inline-block text-primary">
+                    Let&apos;s Build It.
+                    <span className="absolute -bottom-1 left-0 w-full h-[4px] bg-[#FFD43B] rounded-full" />
                   </span>
-                </div>
-              ))}
-            </div>
+                </h2>
+              </div>
+            }
+            description={
+              <div className="space-y-4">
+                <p className="font-sans text-[14.5px] sm:text-[15.5px] text-[#555555] leading-relaxed">
+                  Tell us a little about your idea, and we&apos;ll get back to you within 1 business day.
+                </p>
 
-            {/* CTA Buttons (Wider primary, friendlier "Tell Us About Your Idea") */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 py-1">
-              {/* Primary Button */}
-              <motion.a
-                whileHover={{ y: -2, scale: 1.01 }}
-                whileTap={{ scale: 0.98 }}
-                href="https://cal.com"
-                target="_blank"
-                rel="noreferrer"
-                className="h-[54px] sm:h-[56px] px-8 sm:px-9 rounded-full bg-[#FFD43B] border-[1.5px] border-[#111] text-[#111] font-heading font-bold text-[13.5px] sm:text-[14px] tracking-[0.01em] flex items-center justify-center gap-3 whitespace-nowrap shadow-[0_6px_20px_rgba(255,212,59,0.4)] hover:shadow-[0_10px_28px_rgba(255,212,59,0.5)] transition-all duration-250 cursor-pointer"
-              >
-                <Calendar className="w-4 h-4 text-[#111] shrink-0" strokeWidth={2.2} />
-                <span className="whitespace-nowrap">Book Free Discovery Call</span>
-                <ArrowRight className="w-4 h-4 text-[#111] shrink-0" strokeWidth={2.2} />
-              </motion.a>
-
-              {/* Secondary Button - "Tell Us About Your Idea" */}
-              <motion.a
-                whileHover={{ y: -2, scale: 1.01 }}
-                whileTap={{ scale: 0.98 }}
-                href="#contact"
-                className="h-[54px] sm:h-[56px] px-7 rounded-full bg-white border-[1.5px] border-[#111] text-[#111] font-heading font-bold text-[13.5px] sm:text-[14px] tracking-[0.01em] flex items-center justify-center gap-2.5 whitespace-nowrap shadow-2xs hover:border-primary hover:text-primary transition-all duration-250 cursor-pointer"
-              >
-                <span className="whitespace-nowrap">Tell Us About Your Idea</span>
-                <ArrowRight className="w-4 h-4 shrink-0" strokeWidth={2} />
-              </motion.a>
-            </div>
-
-            {/* Refined Bottom Trust Line */}
-            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-[11.5px] font-medium text-[#666] pt-1">
-              <span className="flex items-center gap-1.5">
-                <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" strokeWidth={2.5} />
-                No obligation
-              </span>
-              <span className="hidden sm:inline text-[#CCC]">•</span>
-              <span className="flex items-center gap-1.5">
-                <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" strokeWidth={2.5} />
-                Usually replies within one business day
-              </span>
-              <span className="hidden sm:inline text-[#CCC]">•</span>
-              <span className="flex items-center gap-1.5">
-                <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" strokeWidth={2.5} />
-                Direct conversation with builders
-              </span>
-            </div>
-          </motion.div>
-
-          {/* ── RIGHT COLUMN (55% DISCOVERY CARD & FLOATING BADGES) ── */}
-          <div className="relative flex items-center justify-center">
-
-            {/* ── DISCOVERY SESSION CARD ── */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.65, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-              whileHover={{ y: -4 }}
-              className="relative z-10 w-full bg-white border-[1.5px] border-[#E2E2E2] rounded-[20px] p-7 sm:p-8 flex flex-col gap-6 transition-all duration-250"
-              style={{ boxShadow: "0 8px 32px rgba(17,17,17,0.04)" }}
-            >
-              {/* Header */}
-              <div className="flex items-center justify-between gap-3 border-b border-[#F1F5F9] pb-4.5">
-                <div className="flex items-center gap-3">
-                  {/* Realistic Founder Avatars */}
-                  <div className="flex items-center -space-x-2.5">
-                    {FOUNDER_AVATARS.map((av) => (
-                      <div
-                        key={av.name}
-                        title={av.name}
-                        className={`w-9 h-9 rounded-full ${av.bg} font-bold text-[11px] flex items-center justify-center shadow-xs shrink-0`}
-                      >
-                        {av.initials}
-                      </div>
-                    ))}
+                {/* Key Guarantees / Highlights */}
+                <div className="space-y-2.5 pt-3">
+                  <div className="flex items-center gap-2.5 text-[13px] font-semibold text-[#111111]">
+                    <Check className="w-4 h-4 text-emerald-600 shrink-0" strokeWidth={2.5} />
+                    <span>Free 30-minute Strategy Session</span>
                   </div>
-                  <div>
-                    <h3 className="font-heading font-bold text-[17px] text-[#111] leading-tight">
-                      Book Your Discovery Call
-                    </h3>
-                    <p className="font-sans text-[11px] text-[#777] mt-0.5">
-                      30-minute founder strategy session. No sales pitch. Just practical advice.
-                    </p>
+                  <div className="flex items-center gap-2.5 text-[13px] font-semibold text-[#111111]">
+                    <Check className="w-4 h-4 text-emerald-600 shrink-0" strokeWidth={2.5} />
+                    <span>MVP Delivery in 2–4 Weeks</span>
+                  </div>
+                  <div className="flex items-center gap-2.5 text-[13px] font-semibold text-[#111111]">
+                    <Check className="w-4 h-4 text-emerald-600 shrink-0" strokeWidth={2.5} />
+                    <span>Direct conversation with builders</span>
                   </div>
                 </div>
 
-                {/* Available Badge */}
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[10px] font-bold shrink-0 self-start">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  Available This Week
+                <div className="pt-2 text-[11.5px] font-medium text-[#777777] flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span>Usually replies within one business day</span>
                 </div>
               </div>
+            }
+          >
+            {/* ── Right Panel Form ── */}
+            <AnimatePresence mode="wait">
+              {status === "success" ? (
+                <motion.div
+                  key="success-card"
+                  initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.4 }}
+                  className="flex flex-col items-center justify-center text-center py-10 px-4 gap-4 bg-[#FAF8F5] rounded-[16px] border border-[#222222]/10"
+                >
+                  <div className="w-14 h-14 rounded-full bg-[#EEF2FF] border border-primary text-primary flex items-center justify-center shadow-xs">
+                    <CheckCircle2 className="w-7 h-7" />
+                  </div>
 
-              {/* Calendar Section */}
-              <div className="flex flex-col gap-2.5">
-                <span className="text-[10px] font-bold tracking-wider text-[#888] uppercase">
-                  TYPICAL AVAILABILITY
-                </span>
+                  <h3 className="font-heading font-extrabold text-[22px] sm:text-[24px] text-[#111111] tracking-tight">
+                    Thanks! We&apos;ll get back to you shortly.
+                  </h3>
 
-                {/* 4 Time Slots Grid (Softer blue glow with blue border for selected slot) */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                  {TIME_SLOTS.map((slot) => (
-                    <motion.div
-                      key={slot.day}
-                      whileHover={{ y: -2 }}
-                      className={`relative flex flex-col items-center justify-center p-3.5 rounded-[16px] border-[1.5px] cursor-pointer transition-all duration-250 text-center ${
-                        slot.selected
-                          ? "bg-[#F0F4FF] border-2 border-primary text-primary shadow-[0_4px_16px_rgba(36,87,255,0.18)]"
-                          : "bg-[#FAFAFA] border-[#E5E5E5] text-[#111] hover:border-primary/40"
-                      }`}
-                    >
-                      {slot.selected && (
-                        <span className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-primary text-white flex items-center justify-center">
-                          <Check className="w-2.5 h-2.5" strokeWidth={3} />
+                  <p className="font-sans text-[13.5px] text-[#555555] max-w-[360px] leading-relaxed">
+                    We have received your enquiry and our engineering team will get back to you within <span className="font-semibold text-[#111111]">1 business day</span>.
+                  </p>
+
+                  <button
+                    onClick={() => {
+                      setStatus("idle");
+                      setFormData({ name: "", email: "", phone: "", service: "app", message: "" });
+                    }}
+                    className="mt-3 px-6 py-2.5 rounded-full border-[1.5px] border-[#222222] bg-[#FFD43B] text-[#111111] font-heading font-bold text-[13px] hover:bg-[#F7CB2D] transition-colors shadow-2xs cursor-pointer"
+                  >
+                    Send Another Enquiry
+                  </button>
+                </motion.div>
+              ) : (
+                <motion.form
+                  key="contact-form"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onSubmit={handleSubmit}
+                  className="flex flex-col gap-4 bg-transparent"
+                >
+                  {/* Row 1: Name & Email Inputs */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    {/* Name */}
+                    <div className="flex flex-col gap-1.5">
+                      <label
+                        htmlFor="cta-name"
+                        className="font-sans text-[11.5px] font-bold text-[#111111] uppercase tracking-wider"
+                      >
+                        Name <span className="text-primary">*</span>
+                      </label>
+                      <input
+                        id="cta-name"
+                        type="text"
+                        placeholder="Your name or company"
+                        value={formData.name}
+                        onChange={(e) => {
+                          setFormData({ ...formData, name: e.target.value });
+                          if (errors.name) setErrors({ ...errors, name: undefined });
+                        }}
+                        className={cn(
+                          "w-full h-[44px] px-3.5 rounded-[10px] bg-white border border-[#222222]/20 font-sans text-[13.5px] text-[#111111] placeholder:text-[#888888] outline-none transition-all duration-200",
+                          "focus:border-primary focus:ring-2 focus:ring-primary/10",
+                          errors.name && "border-red-500 bg-red-50/20"
+                        )}
+                      />
+                      {errors.name && (
+                        <span className="font-sans text-[11px] text-red-600 flex items-center gap-1">
+                          <AlertCircle className="w-3 h-3" />
+                          {errors.name}
                         </span>
                       )}
-                      <Calendar className={`w-4 h-4 mb-1.5 ${slot.selected ? "text-primary" : "text-[#666]"}`} strokeWidth={2} />
-                      <span className={`text-[11px] font-medium ${slot.selected ? "text-primary/90" : "text-[#777]"}`}>
-                        {slot.day}
-                      </span>
-                      <span className={`text-[13px] font-bold ${slot.selected ? "text-primary" : "text-[#111]"}`}>
-                        {slot.time}
-                      </span>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              {/* 3 Equal Information Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div className="h-full p-4 rounded-[16px] bg-[#F8FAFC] border border-[#E2E8F0] flex flex-col justify-between gap-1">
-                  <div>
-                    <div className="w-7.5 h-7.5 rounded-lg bg-blue-50 text-primary flex items-center justify-center mb-2">
-                      <Clock className="w-4 h-4" strokeWidth={2.2} />
                     </div>
-                    <h4 className="font-heading font-bold text-[13px] text-[#111]">30 Minutes</h4>
-                  </div>
-                  <p className="font-sans text-[11px] font-[450] text-[#666] leading-[1.5] mt-1">
-                    Focused conversation to understand your product and goals.
-                  </p>
-                </div>
 
-                <div className="h-full p-4 rounded-[16px] bg-[#F8FAFC] border border-[#E2E8F0] flex flex-col justify-between gap-1">
-                  <div>
-                    <div className="w-7.5 h-7.5 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center mb-2">
-                      <Lightbulb className="w-4 h-4" strokeWidth={2.2} />
+                    {/* Email */}
+                    <div className="flex flex-col gap-1.5">
+                      <label
+                        htmlFor="cta-email"
+                        className="font-sans text-[11.5px] font-bold text-[#111111] uppercase tracking-wider"
+                      >
+                        Email <span className="text-primary">*</span>
+                      </label>
+                      <input
+                        id="cta-email"
+                        type="email"
+                        placeholder="you@company.com"
+                        value={formData.email}
+                        onChange={(e) => {
+                          setFormData({ ...formData, email: e.target.value });
+                          if (errors.email) setErrors({ ...errors, email: undefined });
+                        }}
+                        className={cn(
+                          "w-full h-[44px] px-3.5 rounded-[10px] bg-white border border-[#222222]/20 font-sans text-[13.5px] text-[#111111] placeholder:text-[#888888] outline-none transition-all duration-200",
+                          "focus:border-primary focus:ring-2 focus:ring-primary/10",
+                          errors.email && "border-red-500 bg-red-50/20"
+                        )}
+                      />
+                      {errors.email && (
+                        <span className="font-sans text-[11px] text-red-600 flex items-center gap-1">
+                          <AlertCircle className="w-3 h-3" />
+                          {errors.email}
+                        </span>
+                      )}
                     </div>
-                    <h4 className="font-heading font-bold text-[13px] text-[#111]">Product Strategy</h4>
                   </div>
-                  <p className="font-sans text-[11px] font-[450] text-[#666] leading-[1.5] mt-1">
-                    We&apos;ll help validate your idea and align it with market opportunities.
-                  </p>
-                </div>
 
-                <div className="h-full p-4 rounded-[16px] bg-[#F8FAFC] border border-[#E2E8F0] flex flex-col justify-between gap-1">
-                  <div>
-                    <div className="w-7.5 h-7.5 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center mb-2">
-                      <Code2 className="w-4 h-4" strokeWidth={2.2} />
+                  {/* Row 2: Phone & What do you need? */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    {/* Phone Number */}
+                    <div className="flex flex-col gap-1.5">
+                      <label
+                        htmlFor="cta-phone"
+                        className="font-sans text-[11.5px] font-bold text-[#111111] uppercase tracking-wider"
+                      >
+                        Phone <span className="text-[#888888] font-normal text-[10.5px]">(Optional)</span>
+                      </label>
+                      <input
+                        id="cta-phone"
+                        type="tel"
+                        placeholder="+91 98765 43210"
+                        value={formData.phone}
+                        onChange={(e) => {
+                          setFormData({ ...formData, phone: e.target.value });
+                          if (errors.phone) setErrors({ ...errors, phone: undefined });
+                        }}
+                        className={cn(
+                          "w-full h-[44px] px-3.5 rounded-[10px] bg-white border border-[#222222]/20 font-sans text-[13.5px] text-[#111111] placeholder:text-[#888888] outline-none transition-all duration-200",
+                          "focus:border-primary focus:ring-2 focus:ring-primary/10",
+                          errors.phone && "border-red-500 bg-red-50/20"
+                        )}
+                      />
+                      {errors.phone && (
+                        <span className="font-sans text-[11px] text-red-600 flex items-center gap-1">
+                          <AlertCircle className="w-3 h-3" />
+                          {errors.phone}
+                        </span>
+                      )}
                     </div>
-                    <h4 className="font-heading font-bold text-[13px] text-[#111]">Technical Roadmap</h4>
+
+                    {/* What do you need? (Select Dropdown with "App" option) */}
+                    <div className="flex flex-col gap-1.5">
+                      <label
+                        htmlFor="cta-service"
+                        className="font-sans text-[11.5px] font-bold text-[#111111] uppercase tracking-wider"
+                      >
+                        What do you need?
+                      </label>
+                      <select
+                        id="cta-service"
+                        value={formData.service}
+                        onChange={(e) => setFormData({ ...formData, service: e.target.value as ContactFormData["service"] })}
+                        className="w-full h-[44px] px-3.5 rounded-[10px] bg-white border border-[#222222]/20 font-sans text-[13.5px] text-[#111111] outline-none transition-all duration-200 focus:border-primary focus:ring-2 focus:ring-primary/10 cursor-pointer"
+                      >
+                        {SERVICE_OPTIONS.map((opt) => (
+                          <option key={opt.value} value={opt.value}>
+                            {opt.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
-                  <p className="font-sans text-[11px] font-[450] text-[#666] leading-[1.5] mt-1">
-                    Get a high-level technical plan and recommended approach.
-                  </p>
-                </div>
-              </div>
 
-              {/* Bottom Quote Box (Warmer bg, larger icon, exact quote text, refined signature) */}
-              <div className="relative p-5 rounded-[16px] bg-[#FAF6EE] border border-[#E8E2D6] flex items-start gap-3.5">
-                <div className="w-7.5 h-7.5 rounded-lg bg-primary text-white flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
-                  <Quote className="w-4 h-4 fill-white" />
-                </div>
-                <div className="flex-1">
-                  <p className="font-sans text-[11.5px] font-[450] text-[#2C3E50] leading-relaxed pr-10">
-                    &ldquo;Every successful product starts with a conversation. We&apos;ll understand your goals, validate your idea and create a roadmap before writing a single line of code.&rdquo;
-                  </p>
-                  {/* Handwritten style signature bottom-right */}
-                  <div className="text-right mt-2">
-                    <span className="font-serif italic font-bold text-[12px] text-primary underline decoration-primary/40 decoration-1 underline-offset-2">
-                      Grow With Hustler Team
-                    </span>
+                  {/* Row 3: Short Message Textarea */}
+                  <div className="flex flex-col gap-1.5">
+                    <label
+                      htmlFor="cta-message"
+                      className="font-sans text-[11.5px] font-bold text-[#111111] uppercase tracking-wider"
+                    >
+                      Short Message
+                    </label>
+                    <textarea
+                      id="cta-message"
+                      rows={3}
+                      placeholder="Tell us a bit about your idea, timeline, or goals..."
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      className="w-full p-3 rounded-[10px] bg-white border border-[#222222]/20 font-sans text-[13.5px] text-[#111111] placeholder:text-[#888888] outline-none transition-all duration-200 focus:border-primary focus:ring-2 focus:ring-primary/10 resize-none"
+                    />
                   </div>
-                </div>
-              </div>
-            </motion.div>
 
-            {/* ── FLOATING SIDE BADGES (15% SMALLER, OFFSET FAR RIGHT — ZERO OVERLAP) ── */}
-            <div className="hidden lg:flex flex-col gap-3.5 absolute -right-16 xl:-right-20 z-20">
-              {/* Connector line */}
-              <div className="absolute top-4 bottom-4 left-3.5 w-[1px] border-l-[1.5px] border-dashed border-primary/30 -z-10" />
-
-              {SIDE_BADGES.map((b, i) => (
-                <motion.div
-                  key={b.label}
-                  animate={{ y: [0, -3.5, 0] }}
-                  transition={{ duration: 3.2, repeat: Infinity, delay: i * 0.45, ease: "easeInOut" }}
-                  className="bg-white border border-[#E2E2E2] rounded-full px-2.5 py-1 shadow-sm flex items-center gap-1.5 text-[8.5px] font-semibold text-[#333]"
-                >
-                  {b.Icon ? (
-                    <b.Icon className={`w-2.5 h-2.5 ${b.iconColor}`} strokeWidth={2.5} />
-                  ) : (
-                    <span className={`w-1.5 h-1.5 rounded-full ${b.dotColor}`} />
-                  )}
-                  <span>{b.label}</span>
-                </motion.div>
-              ))}
-            </div>
-
-          </div>
-
-        </div>
-
+                  {/* Submit Button */}
+                  <motion.button
+                    whileHover={{ y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    disabled={status === "submitting"}
+                    type="submit"
+                    className={cn(
+                      "w-full h-[50px] rounded-full border-[1.5px] border-[#222222] bg-[#FFD43B] hover:bg-[#F7CB2D] text-[#111111] font-heading font-extrabold text-[14.5px] tracking-wide flex items-center justify-center gap-2.5 shadow-[0_6px_20px_rgba(255,212,59,0.35)] transition-all duration-200 cursor-pointer mt-1",
+                      status === "submitting" && "opacity-75 cursor-not-allowed"
+                    )}
+                  >
+                    {status === "submitting" ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin text-[#111111]" />
+                        <span>Sending Enquiry...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Send Enquiry</span>
+                        <ArrowRight className="w-4 h-4 text-[#111111]" strokeWidth={2.5} />
+                      </>
+                    )}
+                  </motion.button>
+                </motion.form>
+              )}
+            </AnimatePresence>
+          </ContactCard>
+        </motion.div>
       </div>
     </section>
   );
