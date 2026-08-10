@@ -112,6 +112,8 @@
   }
 
   html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 104px;
     @apply font-sans;
   }
 }

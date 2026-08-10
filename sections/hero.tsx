@@ -192,7 +192,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.3 }}
-          className="shrink-0 border-[1.5px] border-[#222222] rounded-xl lg:rounded-2xl bg-white/40 sm:bg-transparent py-1.5 lg:py-3 px-3 sm:px-6 flex flex-row items-center justify-between gap-3 sm:gap-4 mt-auto"
+          className="hidden sm:flex shrink-0 border-[1.5px] border-[#222222] rounded-xl lg:rounded-2xl bg-white/40 sm:bg-transparent py-1.5 lg:py-3 px-3 sm:px-6 flex-row items-center justify-between gap-3 sm:gap-4 mt-auto"
           style={{ boxShadow: "0 2px 14px rgba(17,17,17,0.04)" }}
         >
           <div className="shrink-0 text-left">
@@ -202,12 +202,11 @@ export function Hero() {
             </p>
           </div>
           <div className="flex items-center justify-end gap-x-4 sm:gap-x-10 flex-1">
-            {brands.map(({ name, cls }, i) => (
+            {brands.map(({ name, cls }) => (
               <span
                 key={name}
                 className={cn(
                   "font-heading text-[12px] sm:text-[17px] tracking-tight hover:scale-105 transition-transform duration-200 cursor-default select-none whitespace-nowrap",
-                  i >= 3 ? "hidden lg:inline" : "",
                   cls
                 )}
               >
