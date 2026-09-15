@@ -14,14 +14,15 @@ import {
   Landmark,
   Leaf,
   ListChecks,
-  MapPinned,
   Plus,
   Search,
-  Smartphone,
   Sparkles,
   TrendingUp,
   TriangleAlert,
 } from "lucide-react";
+import { Container } from "@/components/layout/container";
+import { Eyebrow, Highlight, SECTION_LEAD, SECTION_TITLE } from "@/components/ui/section-heading";
+import { TechIcon } from "@/components/ui/tech-icon";
 import { cn } from "@/lib/utils";
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -33,102 +34,6 @@ function reveal(delay = 0) {
     viewport: { once: true, amount: 0.15 },
     transition: { duration: 0.6, delay, ease: EASE },
   };
-}
-
-/* ─────────────────────────────────────────
-   TECH STACK ICONS
-───────────────────────────────────────── */
-function TechIcon({ name }: { name: string }) {
-  switch (name) {
-    case "Next.js":
-      return (
-        <span className="w-4 h-4 rounded-full bg-black flex items-center justify-center text-white shrink-0">
-          <svg viewBox="0 0 180 180" className="w-2.5 h-2.5 fill-current">
-            <path d="M140 160L60 60V160H40V20H60L140 120V20H160V160H140Z" />
-          </svg>
-        </span>
-      );
-    case "Prisma":
-      return (
-        <svg viewBox="0 0 24 24" className="w-4 h-4 fill-[#2D3748] shrink-0">
-          <path d="M22.5 16.5L12 1.5L1.5 16.5L6 22.5H18L22.5 16.5ZM12 4.5L19.5 15H15L12 9L9 15H4.5L12 4.5Z" />
-        </svg>
-      );
-    case "Supabase":
-      return (
-        <svg viewBox="0 0 24 24" className="w-4 h-4 fill-[#3ECF8E] shrink-0">
-          <path d="M13.35 24v-9.52h7.83c.73 0 1.13-.85.67-1.42L9.65 0v9.52H1.82c-.73 0-1.13.85-.67 1.42L13.35 24z" />
-        </svg>
-      );
-    case "Tailwind":
-      return (
-        <svg viewBox="0 0 24 24" className="w-4 h-4 fill-[#38BDF8] shrink-0">
-          <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.336 6.182 14.975 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C3.666 17.818 5.027 19.2 8.001 19.2c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C6.336 13.382 4.975 12 2.001 12z" />
-        </svg>
-      );
-    case "React":
-    case "React Native":
-      return (
-        <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-[#149ECA] shrink-0" strokeWidth="2">
-          <ellipse cx="12" cy="12" rx="9" ry="3.5" />
-          <ellipse cx="12" cy="12" rx="9" ry="3.5" transform="rotate(60 12 12)" />
-          <ellipse cx="12" cy="12" rx="9" ry="3.5" transform="rotate(120 12 12)" />
-          <circle cx="12" cy="12" r="1.8" fill="#149ECA" />
-        </svg>
-      );
-    case "Node.js":
-      return (
-        <svg viewBox="0 0 24 24" className="w-4 h-4 fill-[#5FA04E] shrink-0">
-          <path d="M12 2L2 7.5v9L12 22l10-5.5v-9L12 2zm0 2.3l7.5 4.1v7.2L12 19.7l-7.5-4.1V8.4L12 4.3z" />
-        </svg>
-      );
-    case "MongoDB":
-      return (
-        <svg viewBox="0 0 24 24" className="w-4 h-4 fill-[#47A248] shrink-0">
-          <path d="M12 1.5s-7 7.5-7 13.5c0 3.86 3.14 7 7 7s7-3.14 7-7c0-6-7-13.5-7-13.5zm0 18c-2.48 0-4.5-2.02-4.5-4.5 0-3.3 3.3-8.1 4.5-9.7 1.2 1.6 4.5 6.4 4.5 9.7 0 2.48-2.02 4.5-4.5 4.5z" />
-        </svg>
-      );
-    case "Gemini AI":
-    case "Gemini":
-      return (
-        <svg viewBox="0 0 24 24" className="w-4 h-4 fill-[#1A73E8] shrink-0">
-          <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
-        </svg>
-      );
-    case "Expo":
-      return (
-        <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current text-black shrink-0">
-          <path d="M12 2L1 21h22L12 2zm0 4.5l7.5 13h-15L12 6.5z" />
-        </svg>
-      );
-    case "Firebase":
-      return (
-        <svg viewBox="0 0 24 24" className="w-4 h-4 shrink-0">
-          <path fill="#FFA000" d="M5 19 8.2 3.2c.1-.5.8-.6 1-.1L12 8.5 5 19Z" />
-          <path fill="#F57C00" d="M13.4 10.3 12 7.6 5 19l8.4-8.7Z" />
-          <path fill="#FFCA28" d="m5 19 11.6-13c.3-.4 1-.2 1 .3L19 19l-6.1 3.4a1.8 1.8 0 0 1-1.8 0L5 19Z" />
-        </svg>
-      );
-    case "OpenStreetMap":
-      return <MapPinned className="w-4 h-4 text-[#7EBC6F] shrink-0" strokeWidth={2.2} />;
-    case "PWA":
-      return <Smartphone className="w-4 h-4 text-[#5A0FC8] shrink-0" strokeWidth={2.2} />;
-    case "Socket.io":
-      return (
-        <svg viewBox="0 0 24 24" className="w-4 h-4 shrink-0" fill="none">
-          <circle cx="12" cy="12" r="9.5" stroke="#111" strokeWidth="2" />
-          <path d="M13.6 5.5 8 13h3.6l-1.2 5.5L16 11h-3.6l1.2-5.5Z" fill="#111" />
-        </svg>
-      );
-    case "Framer Motion":
-      return (
-        <svg viewBox="0 0 24 24" className="w-4 h-4 fill-[#BB4B96] shrink-0">
-          <path d="M5 2h14v7h-7L5 2Zm0 7h7l7 7h-7v6l-7-7V9Z" />
-        </svg>
-      );
-    default:
-      return <span className="w-2 h-2 rounded-full bg-primary" />;
-  }
 }
 
 /* ─────────────────────────────────────────
@@ -552,7 +457,7 @@ function ProgressRing({ value, className }: { value: number; className?: string 
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
         <span className="text-[1.7em] font-extrabold leading-none">{value}%</span>
-        <span className="mt-[0.3em] text-[0.7em] text-slate-500">daily goal</span>
+        <span className="mt-[0.3em] text-[0.7em] text-slate-600">daily goal</span>
       </div>
     </div>
   );
@@ -571,15 +476,15 @@ function SatvikDashboardScreen() {
     <div className="flex aspect-[16/10] flex-col gap-[1em] bg-[#F7FAF8] p-[1.3em] text-[#0F172A]">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-[0.5em]">
-          <span className="flex size-[1.9em] items-center justify-center rounded-[0.55em] bg-emerald-600 text-white">
+          <span className="flex size-[1.9em] items-center justify-center rounded-[0.55em] bg-emerald-700 text-white">
             <Leaf className="size-[1.1em]" />
           </span>
           <span className="text-[1.15em] font-bold tracking-tight">SatvikAI</span>
         </div>
         <div className="flex items-center gap-[0.3em] text-[0.85em] font-semibold">
-          <span className="rounded-full bg-emerald-600 px-[0.9em] py-[0.3em] text-white">Dashboard</span>
-          <span className="px-[0.6em] text-slate-500">Meal plans</span>
-          <span className="px-[0.6em] text-slate-500">Scan</span>
+          <span className="rounded-full bg-emerald-700 px-[0.9em] py-[0.3em] text-white">Dashboard</span>
+          <span className="px-[0.6em] text-slate-600">Meal plans</span>
+          <span className="px-[0.6em] text-slate-600">Scan</span>
         </div>
         <span className="size-[1.9em] rounded-full bg-gradient-to-br from-amber-300 to-orange-400" />
       </div>
@@ -587,7 +492,7 @@ function SatvikDashboardScreen() {
       <div className="grid min-h-0 flex-1 grid-cols-[1.25fr_1fr] gap-[1em]">
         <div className="flex flex-col rounded-[0.9em] bg-white p-[1.1em] ring-1 ring-black/5">
           <div className="flex items-center justify-between">
-            <span className="text-[0.85em] font-semibold text-slate-500">Today&apos;s nutrition</span>
+            <span className="text-[0.85em] font-semibold text-slate-600">Today&apos;s nutrition</span>
             <span className="rounded-full bg-emerald-50 px-[0.6em] py-[0.15em] text-[0.72em] font-bold text-emerald-700">
               On track
             </span>
@@ -598,7 +503,7 @@ function SatvikDashboardScreen() {
               {MACROS.map((m) => (
                 <div key={m.label}>
                   <div className="flex items-baseline justify-between text-[0.8em]">
-                    <span className="text-slate-500">{m.label}</span>
+                    <span className="text-slate-600">{m.label}</span>
                     <span className="font-bold">{m.value}</span>
                   </div>
                   <div className="mt-[0.3em] h-[0.45em] overflow-hidden rounded-full bg-slate-100">
@@ -610,7 +515,7 @@ function SatvikDashboardScreen() {
           </div>
           <div className="mt-[1.1em]">
             <div className="flex items-center justify-between text-[0.72em]">
-              <span className="text-slate-500">This week</span>
+              <span className="text-slate-600">This week</span>
               <span className="font-semibold text-emerald-700">5-day streak</span>
             </div>
             <div className="mt-[0.5em] flex h-[4.5em] items-end gap-[0.45em]">
@@ -629,7 +534,7 @@ function SatvikDashboardScreen() {
                 key={meal}
                 className={cn(
                   "flex items-center justify-center gap-[0.3em] rounded-[0.6em] py-[0.55em] text-[0.72em] font-semibold",
-                  i < 2 ? "bg-emerald-50 text-emerald-800" : "bg-slate-100 text-slate-500"
+                  i < 2 ? "bg-emerald-50 text-emerald-800" : "bg-slate-100 text-slate-600"
                 )}
               >
                 {i < 2 && <Check className="size-[1em]" strokeWidth={3} />}
@@ -640,7 +545,7 @@ function SatvikDashboardScreen() {
         </div>
 
         <div className="flex flex-col rounded-[0.9em] bg-white p-[1.1em] ring-1 ring-black/5">
-          <div className="flex items-center gap-[0.4em] text-[0.85em] font-semibold text-slate-500">
+          <div className="flex items-center gap-[0.4em] text-[0.85em] font-semibold text-slate-600">
             <Sparkles className="size-[1em] text-emerald-600" />
             AI meal scan
           </div>
@@ -648,7 +553,7 @@ function SatvikDashboardScreen() {
             <FoodBowl className="size-[4.4em] shrink-0" />
             <div className="min-w-0">
               <p className="truncate text-[1.05em] font-bold">Quinoa Salad</p>
-              <p className="text-[0.78em] text-slate-500">420 kcal · 1 bowl</p>
+              <p className="text-[0.78em] text-slate-600">420 kcal · 1 bowl</p>
             </div>
           </div>
           <div className="mt-[1em] flex flex-wrap gap-[0.4em]">
@@ -666,7 +571,7 @@ function SatvikDashboardScreen() {
               Suggested swap
             </p>
             <p className="mt-[0.3em] text-[0.8em] font-semibold">Lemon &amp; olive oil dressing</p>
-            <p className="text-[0.66em] text-slate-500">Sesame-free · 40 kcal less</p>
+            <p className="text-[0.66em] text-slate-600">Sesame-free · 40 kcal less</p>
           </div>
           <div className="mt-auto space-y-[0.5em] pt-[1em]">
             <div className="h-[0.5em] w-full rounded-full bg-slate-100" />
@@ -716,7 +621,7 @@ function SatvikScanScreen() {
             ["Fat", "14g"],
           ].map(([label, value]) => (
             <div key={label} className="rounded-[0.5em] bg-white py-[0.3em] ring-1 ring-black/5">
-              <p className="text-[0.6em] text-slate-500">{label}</p>
+              <p className="text-[0.6em] text-slate-600">{label}</p>
               <p className="text-[0.8em] font-bold">{value}</p>
             </div>
           ))}
@@ -728,7 +633,7 @@ function SatvikScanScreen() {
         Sesame detected
       </div>
 
-      <div className="mt-auto rounded-full bg-emerald-600 py-[0.6em] text-center text-[0.8em] font-bold text-white">
+      <div className="mt-auto rounded-full bg-emerald-700 py-[0.6em] text-center text-[0.8em] font-bold text-white">
         Add to meal plan
       </div>
     </div>
@@ -797,7 +702,7 @@ function TaskRow({ task }: { task: Task }) {
       >
         {task.done && <Check className="size-[0.8em]" strokeWidth={3} />}
       </span>
-      <span className={cn("min-w-0 flex-1 truncate text-[0.76em] font-medium", task.done && "text-white/40 line-through")}>
+      <span className={cn("min-w-0 flex-1 truncate text-[0.76em] font-medium", task.done && "text-white/60 line-through")}>
         {task.title}
       </span>
       <span className={cn("shrink-0 rounded-full px-[0.6em] py-[0.2em] text-[0.6em] font-bold", PRIORITY_STYLES[task.priority])}>
@@ -842,7 +747,7 @@ function IntentoNotesScreen() {
         <div key={note.title} className="rounded-[0.9em] bg-white/[0.04] p-[0.8em] ring-1 ring-white/[0.06]">
           <div className="flex items-center justify-between gap-[0.5em]">
             <span className="truncate text-[0.82em] font-semibold">{note.title}</span>
-            <span className="shrink-0 text-[0.62em] text-white/40">{note.time}</span>
+            <span className="shrink-0 text-[0.62em] text-white/60">{note.time}</span>
           </div>
           <div className="mt-[0.45em] h-[0.4em] w-4/5 rounded-full bg-white/10" />
         </div>
@@ -880,7 +785,7 @@ function IntentoTasksScreen() {
         <TaskRow key={task.title} task={task} />
       ))}
 
-      <p className="mt-[0.4em] text-[0.62em] font-bold uppercase tracking-wider text-white/40">Tomorrow</p>
+      <p className="mt-[0.4em] text-[0.62em] font-bold uppercase tracking-wider text-white/60">Tomorrow</p>
 
       {TOMORROW_TASKS.map((task) => (
         <TaskRow key={task.title} task={task} />
@@ -1063,7 +968,7 @@ export function Projects() {
       <section
         id="projects"
         aria-labelledby="projects-heading"
-        className="relative w-full bg-background overflow-hidden py-14 sm:py-20 lg:py-28"
+        className="relative w-full bg-background overflow-hidden py-20 sm:py-24"
       >
         {/* ── Background Texture ── */}
         <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.12]">
@@ -1089,35 +994,19 @@ export function Projects() {
           <rect width="100%" height="100%" fill="url(#bpGridProjects)" />
         </svg>
 
-        <div aria-hidden="true" className="absolute top-10 right-14 pointer-events-none opacity-50 z-[1]">
-          <Sparkles className="w-4 h-4 text-[#FFD43B] fill-[#FFD43B]" />
-        </div>
-
-        <div className="relative z-10 w-full max-w-[1280px] mx-auto px-5 sm:px-6 lg:px-10">
+        <Container className="relative z-10">
           {/* ── Section Header ── */}
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:items-end lg:gap-14">
             <motion.div {...reveal()}>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border-[1.5px] border-[#222] bg-white font-sans text-[11px] font-semibold tracking-wide text-[#111] shadow-xs">
-                <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-primary" />
-                FEATURED WORK
-              </span>
-              <h2
-                id="projects-heading"
-                className="mt-5 font-heading font-extrabold text-[#111] leading-[1.05] tracking-[-0.035em] text-[clamp(34px,4.2vw,56px)]"
-              >
-                <span className="block">Real Products.</span>
-                <span className="block">Real Businesses.</span>
-                <span className="relative inline-block text-primary">
-                  Real Results.
-                  <span aria-hidden="true" className="absolute -bottom-1 left-0 w-full h-[4px] bg-[#FFD43B] rounded-full" />
-                </span>
+              <Eyebrow>Featured work</Eyebrow>
+              <h2 id="projects-heading" className={cn(SECTION_TITLE, "mt-5")}>
+                <span className="block">Real products.</span>
+                <span className="block">Real businesses.</span>
+                <Highlight>Real results.</Highlight>
               </h2>
             </motion.div>
 
-            <motion.p
-              {...reveal(0.08)}
-              className="font-sans text-[15px] sm:text-[16px] leading-[1.7] text-[#555] lg:pb-2"
-            >
+            <motion.p {...reveal(0.08)} className={cn(SECTION_LEAD, "lg:pb-2")}>
               We&apos;ve helped founders launch production-ready digital products that are fast,
               scalable, and built for growth. Here&apos;s a look at what we&apos;ve shipped.
             </motion.p>
@@ -1206,19 +1095,19 @@ export function Projects() {
                   href="#contact"
                   className="group/cta inline-flex h-[50px] items-center justify-center gap-2 rounded-xl border-[1.5px] border-[#FFD43B] bg-[#FFD43B] px-6 font-heading text-[14.5px] font-bold text-[#111] transition-all hover:-translate-y-0.5 hover:bg-[#F7CB2D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD43B] focus-visible:ring-offset-2 focus-visible:ring-offset-[#111]"
                 >
-                  Start Your Project
+                  Start your project
                   <ArrowRight aria-hidden="true" className="size-4 transition-transform group-hover/cta:translate-x-0.5" />
                 </Link>
                 <Link
                   href="#process"
                   className="inline-flex h-[50px] items-center justify-center rounded-xl border-[1.5px] border-white/25 px-6 font-heading text-[14.5px] font-bold text-white transition-colors hover:border-white/60 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#111]"
                 >
-                  See How We Work
+                  See how we work
                 </Link>
               </div>
             </div>
           </motion.div>
-        </div>
+        </Container>
       </section>
     </MotionConfig>
   );
