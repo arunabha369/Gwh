@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ArrowUpRight, Mail } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { NAV_ITEMS, SITE } from "@/lib/site";
+import { SocialLinks } from "@/components/ui/social-links";
 import { SERVICES } from "@/lib/services";
 
 const HEADING = "font-sans text-[12px] font-bold uppercase tracking-[0.12em] text-[#6F6A5E]";
@@ -27,6 +28,10 @@ export function Footer() {
             <p className="max-w-[340px] font-sans text-[14.5px] leading-[1.65] text-[#555]">
               We design and build websites, apps, SaaS platforms and AI products for founders and growing businesses.
             </p>
+            <div className="mt-2">
+              <p className={HEADING}>Follow our work</p>
+              <SocialLinks className="mt-3" />
+            </div>
           </div>
 
           <nav aria-label="Footer">

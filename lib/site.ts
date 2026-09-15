@@ -7,6 +7,13 @@ export const SITE = {
     "Grow With Hustler is a product development agency building websites, web and mobile apps, SaaS platforms, AI solutions and automations for founders and growing businesses.",
 } as const;
 
+export const SOCIAL_LINKS = [
+  { name: "YouTube", handle: "@grow.with.hustler", href: "https://www.youtube.com/@grow.with.hustler" },
+  { name: "Instagram", handle: "@growwithhustler.in", href: "https://www.instagram.com/growwithhustler.in/" },
+] as const;
+
+export type SocialName = (typeof SOCIAL_LINKS)[number]["name"];
+
 export const NAV_ITEMS = [
   { name: "Services", href: "/#services", section: "services" },
   { name: "Projects", href: "/#projects", section: "projects" },

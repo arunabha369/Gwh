@@ -16,6 +16,8 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
           smoothWheel: true,
           autoRaf: true,
+          // Leave open dialogs (video player) to native handling; globals.css locks page scroll.
+          prevent: (node) => node.nodeName === "DIALOG" || !!node.closest?.("dialog"),
         });
 
     // Same-page hash links (e.g. "/#contact" while on "/") are handled here, in the capture

@@ -10,6 +10,7 @@ import { Eyebrow, Highlight } from "@/components/ui/section-heading";
 import { contactFormSchema, type ContactFormData } from "@/lib/validations/contact";
 import { SERVICES, SERVICE_SELECT_EVENT, type ServiceValue } from "@/lib/services";
 import { SITE } from "@/lib/site";
+import { SocialLinks } from "@/components/ui/social-links";
 import { cn } from "@/lib/utils";
 
 type FormValues = Omit<ContactFormData, "service"> & { service: ServiceValue | "" };
@@ -174,6 +175,10 @@ export function CTA() {
                       <Mail aria-hidden="true" className="size-4 shrink-0 text-primary" />
                       {SITE.email}
                     </a>
+                    <p className="mt-4 border-t border-[#222]/10 pt-4 font-sans text-[13px] text-[#6B6B6B]">
+                      See what we&apos;re building
+                    </p>
+                    <SocialLinks className="mt-2" />
                   </div>
                 </div>
               }

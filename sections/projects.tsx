@@ -18,11 +18,16 @@ import {
   Search,
   Sparkles,
   TrendingUp,
+  Play,
   TriangleAlert,
+  Dumbbell,
 } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { Eyebrow, Highlight, SECTION_LEAD, SECTION_TITLE } from "@/components/ui/section-heading";
 import { TechIcon } from "@/components/ui/tech-icon";
+import { VideoButton, VideoPoster, type YouTubeVideo } from "@/components/ui/video-dialog";
+import { YouTubeIcon } from "@/components/ui/social-links";
+import { SOCIAL_LINKS } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -59,7 +64,24 @@ interface Project {
   Preview: () => React.ReactElement;
   featured?: boolean;
   links?: ProjectLink[];
+  video?: YouTubeVideo;
+  /** Upcoming templates get their own card below the delivered work */
+  status?: "upcoming";
 }
+
+const SWAPNO_VIDEO: YouTubeVideo = {
+  id: "HU94bz1KX4A",
+  title: "How we built a custom dealership dashboard for Swapno Motors",
+  poster: "/images/videos/swapno-motors-walkthrough.jpg",
+  duration: "34 min",
+};
+
+const GYM_VIDEO: YouTubeVideo = {
+  id: "iIEKPWElc3E",
+  title: "Gym Management System: complete admin dashboard walkthrough",
+  poster: "/images/videos/gym-management-walkthrough.jpg",
+  duration: "17 min",
+};
 
 const PROJECTS: Project[] = [
   {
@@ -77,6 +99,7 @@ const PROJECTS: Project[] = [
     Preview: SwapnoPreview,
     featured: true,
     links: [{ label: "Visit site", href: "https://www.swapnomotors.com/", kind: "live" }],
+    video: SWAPNO_VIDEO,
   },
   {
     id: "puja-parikrama",
@@ -162,7 +185,33 @@ const PROJECTS: Project[] = [
       { label: "GitHub", href: "https://github.com/arunabha369/trading-zone", kind: "github" },
     ],
   },
+  {
+    id: "gym-management",
+    name: "Gym Management System",
+    category: "Gym website + admin dashboard template",
+    platform: "Template",
+    year: "2026",
+    summary:
+      "A ready-to-launch system for gyms and fitness studios: a premium public website with membership plans and WhatsApp enrolment, plus an admin dashboard to run members, trainers and attendance from one place.",
+    features: ["Membership Plans", "Member Management", "Trainer Profiles", "Attendance Tracking", "Live Occupancy", "Admin Dashboard"],
+    tech: ["Next.js", "Tailwind"],
+    logoClassName: "bg-[#0B0B0B] text-[#C3FF3D]",
+    logo: <Dumbbell className="w-5 h-5" strokeWidth={2.2} />,
+    Preview: GymPreview,
+    status: "upcoming",
+    video: GYM_VIDEO,
+    links: [{ label: "Live demo", href: "https://gym-template-pink.vercel.app/", kind: "live" }],
+  },
 ];
+
+function GymPreview() {
+  return (
+    <VideoPoster
+      video={GYM_VIDEO}
+      sizes="(min-width: 1024px) 680px, 92vw"
+    />
+  );
+}
 
 /* ─────────────────────────────────────────
    DEVICE FRAMES
@@ -857,10 +906,17 @@ function ProjectDetails({ project, featured = false }: { project: Project; featu
             <p className="mt-0.5 font-sans text-[13px] font-medium text-[#6B6B6B]">{project.category}</p>
           </div>
         </div>
-        {featured && (
-          <span className="shrink-0 rounded-full border-[1.5px] border-[#222] bg-[#FFD43B] px-2.5 py-1 font-sans text-[10.5px] font-bold uppercase tracking-wider text-[#111]">
-            Featured
+        {project.status === "upcoming" ? (
+          <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border-[1.5px] border-[#222] bg-white px-2.5 py-1 font-sans text-[10.5px] font-bold uppercase tracking-wider text-[#111]">
+            <span aria-hidden="true" className="size-1.5 animate-pulse rounded-full bg-amber-500" />
+            Coming soon
           </span>
+        ) : (
+          featured && (
+            <span className="shrink-0 rounded-full border-[1.5px] border-[#222] bg-[#FFD43B] px-2.5 py-1 font-sans text-[10.5px] font-bold uppercase tracking-wider text-[#111]">
+              Featured
+            </span>
+          )
         )}
       </div>
 
@@ -875,7 +931,7 @@ function ProjectDetails({ project, featured = false }: { project: Project; featu
 
       <div className="mt-6">
         <p id={featuresId} className={LIST_LABEL}>
-          What we built
+          {project.status === "upcoming" ? "What's included" : "What we built"}
         </p>
         <ul aria-labelledby={featuresId} className="mt-2.5 flex flex-wrap gap-2">
           {project.features.map((feature) => (
@@ -913,6 +969,16 @@ function ProjectDetails({ project, featured = false }: { project: Project; featu
           </span>
           {project.links?.length ? (
             <div className="flex flex-wrap items-center gap-2">
+              {project.video && (
+                <VideoButton
+                  video={project.video}
+                  className="inline-flex h-9 items-center gap-1.5 rounded-full border-[1.5px] border-[#222] bg-[#FFD43B] px-3.5 font-sans text-[12.5px] font-semibold text-[#111] transition-colors hover:bg-[#F7CB2D]"
+                >
+                  <Play aria-hidden="true" className="size-3.5 fill-current" />
+                  Watch video
+                  <span className="sr-only">: {project.video.title}</span>
+                </VideoButton>
+              )}
               {project.links.map((link) => (
                 <a
                   key={link.href}
@@ -960,8 +1026,10 @@ const CARD_BASE =
    MAIN FEATURED PROJECTS SECTION
 ───────────────────────────────────────── */
 export function Projects() {
-  const featured = PROJECTS.filter((project) => project.featured);
-  const others = PROJECTS.filter((project) => !project.featured);
+  const featured = PROJECTS.filter((project) => project.featured && !project.status);
+  const others = PROJECTS.filter((project) => !project.featured && !project.status);
+  const upcoming = PROJECTS.filter((project) => project.status === "upcoming");
+  const youtube = SOCIAL_LINKS.find((social) => social.name === "YouTube")!;
 
   return (
     <MotionConfig reducedMotion="user">
@@ -1006,10 +1074,23 @@ export function Projects() {
               </h2>
             </motion.div>
 
-            <motion.p {...reveal(0.08)} className={cn(SECTION_LEAD, "lg:pb-2")}>
-              We&apos;ve helped founders launch production-ready digital products that are fast,
-              scalable, and built for growth. Here&apos;s a look at what we&apos;ve shipped.
-            </motion.p>
+            <motion.div {...reveal(0.08)} className="lg:pb-2">
+              <p className={SECTION_LEAD}>
+                We&apos;ve helped founders launch production-ready digital products that are fast,
+                scalable, and built for growth. Here&apos;s a look at what we&apos;ve shipped.
+              </p>
+              <a
+                href={youtube.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center gap-2 font-heading text-[15px] font-bold text-[#111] underline decoration-[#222]/25 decoration-2 underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
+              >
+                <YouTubeIcon className="size-5" />
+                Watch our build walkthroughs on YouTube
+                <ArrowUpRight aria-hidden="true" className="size-4" />
+                <span className="sr-only">(opens in a new tab)</span>
+              </a>
+            </motion.div>
           </div>
 
           {/* ── Projects ── */}
@@ -1062,6 +1143,37 @@ export function Projects() {
               ))}
             </div>
           </div>
+
+          {/* ── Upcoming templates ── */}
+          {upcoming.length > 0 && (
+            <div className="mt-14 lg:mt-16">
+              <motion.div {...reveal()} className="flex flex-wrap items-end justify-between gap-3">
+                <div>
+                  <p className={LIST_LABEL}>Coming soon</p>
+                  <h3 className="mt-2 font-heading text-[26px] font-extrabold tracking-[-0.02em] text-[#111] sm:text-[30px]">
+                    Ready-made templates, launching next
+                  </h3>
+                </div>
+              </motion.div>
+              <div className="mt-6 grid gap-5 lg:gap-6">
+                {upcoming.map((project) => (
+                  <motion.article
+                    key={project.id}
+                    {...reveal()}
+                    aria-labelledby={`${project.id}-title`}
+                    className={cn(CARD_BASE, "grid lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:gap-4")}
+                  >
+                    <div className="flex h-full items-center">
+                      <project.Preview />
+                    </div>
+                    <div className="px-2 pb-2 pt-6 sm:px-4 sm:pb-4 lg:py-6 lg:pl-6 lg:pr-5">
+                      <ProjectDetails project={project} featured />
+                    </div>
+                  </motion.article>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* ── Closing CTA ── */}
           <motion.div

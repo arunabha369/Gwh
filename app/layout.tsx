@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { LenisProvider } from "@/components/providers/lenis-provider";
-import { SITE } from "@/lib/site";
+import { SITE, SOCIAL_LINKS } from "@/lib/site";
 import { SERVICES } from "@/lib/services";
 import "./globals.css";
 
@@ -72,6 +72,7 @@ const organizationJsonLd = {
   email: SITE.email,
   description: SITE.description,
   logo: `${SITE.url}/images/hero/GWH_LOGOU.png`,
+  sameAs: SOCIAL_LINKS.map((social) => social.href),
   areaServed: "Worldwide",
   address: { "@type": "PostalAddress", addressCountry: "IN" },
   founder: [

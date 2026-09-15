@@ -112,6 +112,11 @@
     }
   }
 
+  /* Lock page scroll while a modal (e.g. the video player) is open */
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+
   ::selection {
     background-color: #ffd43b;
     color: #111111;

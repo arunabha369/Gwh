@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { NAV_ITEMS } from "@/lib/site";
+import { SocialLinks } from "@/components/ui/social-links";
 import { cn } from "@/lib/utils";
 
 /** Tracks which home page section is in the middle of the viewport. */
@@ -194,6 +195,7 @@ export function Navbar() {
                 Start a project
                 <ArrowRight aria-hidden="true" className="size-4" />
               </Link>
+              <SocialLinks />
             </Container>
           </motion.div>
         )}
