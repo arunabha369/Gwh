@@ -171,6 +171,7 @@ const PROJECTS: Project[] = [
     logo: <span className="font-heading font-extrabold text-[18px]">S</span>,
     Preview: SwapnoPreview,
     featured: true,
+    links: [{ label: "Visit site", href: "https://www.swapnomotors.com/", kind: "live" }],
   },
   {
     id: "puja-parikrama",
