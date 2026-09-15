@@ -6,14 +6,20 @@ import Link from "next/link";
 import { motion, MotionConfig } from "framer-motion";
 import {
   ArrowRight,
+  ArrowUpRight,
   Check,
   CircleUser,
+  CodeXml,
   House,
+  Landmark,
   Leaf,
   ListChecks,
+  MapPinned,
   Plus,
   Search,
+  Smartphone,
   Sparkles,
+  TrendingUp,
   TriangleAlert,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -95,6 +101,31 @@ function TechIcon({ name }: { name: string }) {
           <path d="M12 2L1 21h22L12 2zm0 4.5l7.5 13h-15L12 6.5z" />
         </svg>
       );
+    case "Firebase":
+      return (
+        <svg viewBox="0 0 24 24" className="w-4 h-4 shrink-0">
+          <path fill="#FFA000" d="M5 19 8.2 3.2c.1-.5.8-.6 1-.1L12 8.5 5 19Z" />
+          <path fill="#F57C00" d="M13.4 10.3 12 7.6 5 19l8.4-8.7Z" />
+          <path fill="#FFCA28" d="m5 19 11.6-13c.3-.4 1-.2 1 .3L19 19l-6.1 3.4a1.8 1.8 0 0 1-1.8 0L5 19Z" />
+        </svg>
+      );
+    case "OpenStreetMap":
+      return <MapPinned className="w-4 h-4 text-[#7EBC6F] shrink-0" strokeWidth={2.2} />;
+    case "PWA":
+      return <Smartphone className="w-4 h-4 text-[#5A0FC8] shrink-0" strokeWidth={2.2} />;
+    case "Socket.io":
+      return (
+        <svg viewBox="0 0 24 24" className="w-4 h-4 shrink-0" fill="none">
+          <circle cx="12" cy="12" r="9.5" stroke="#111" strokeWidth="2" />
+          <path d="M13.6 5.5 8 13h3.6l-1.2 5.5L16 11h-3.6l1.2-5.5Z" fill="#111" />
+        </svg>
+      );
+    case "Framer Motion":
+      return (
+        <svg viewBox="0 0 24 24" className="w-4 h-4 fill-[#BB4B96] shrink-0">
+          <path d="M5 2h14v7h-7L5 2Zm0 7h7l7 7h-7v6l-7-7V9Z" />
+        </svg>
+      );
     default:
       return <span className="w-2 h-2 rounded-full bg-primary" />;
   }
@@ -103,6 +134,12 @@ function TechIcon({ name }: { name: string }) {
 /* ─────────────────────────────────────────
    PROJECT DEFINITIONS
 ───────────────────────────────────────── */
+interface ProjectLink {
+  label: string;
+  href: string;
+  kind: "live" | "github";
+}
+
 interface Project {
   id: string;
   name: string;
@@ -115,6 +152,8 @@ interface Project {
   logoClassName: string;
   logo: React.ReactNode;
   Preview: () => React.ReactElement;
+  featured?: boolean;
+  links?: ProjectLink[];
 }
 
 const PROJECTS: Project[] = [
@@ -131,6 +170,23 @@ const PROJECTS: Project[] = [
     logoClassName: "bg-[#0A0D0B] text-[#6BFF4F]",
     logo: <span className="font-heading font-extrabold text-[18px]">S</span>,
     Preview: SwapnoPreview,
+    featured: true,
+  },
+  {
+    id: "puja-parikrama",
+    name: "Puja Parikrama",
+    category: "Festival Guide & Route Planner",
+    platform: "Web app (PWA)",
+    year: "2026",
+    summary:
+      "A free Durga Puja companion for Kolkata: 187 pandals on a live map, walkable routes with metro info, crowd reports and group tracking, and it keeps working when the network drops.",
+    features: ["Live Pandal Map", "Route Planner", "Queue Reports", "Group Tracking", "Offline Mode"],
+    tech: ["Next.js", "Firebase", "OpenStreetMap", "PWA"],
+    logoClassName: "bg-[#8B1E1E] text-[#FDE7C2]",
+    logo: <Landmark className="w-5 h-5" strokeWidth={2.2} />,
+    Preview: PujaParikramaPreview,
+    featured: true,
+    links: [{ label: "Visit site", href: "https://www.pujaparikrama.in/", kind: "live" }],
   },
   {
     id: "satvik",
@@ -163,6 +219,42 @@ const PROJECTS: Project[] = [
       </svg>
     ),
     Preview: IntentoPreview,
+  },
+  {
+    id: "codemate",
+    name: "CodeMate",
+    category: "Developer Networking Platform",
+    platform: "Web app",
+    year: "2026",
+    summary:
+      "A matchmaking platform for developers. Swipe through profiles matched on tech stack, connect, and chat in real time, with GitHub and LinkedIn sign-in for verified profiles.",
+    features: ["Swipe Matching", "Real-time Chat", "GitHub & LinkedIn Login", "Connection Requests", "Developer Profiles"],
+    tech: ["React", "Node.js", "MongoDB", "Socket.io"],
+    logoClassName: "bg-[#12060E] text-[#F43F5E] border border-[#3B1328]",
+    logo: <CodeXml className="w-5 h-5" strokeWidth={2.2} />,
+    Preview: CodeMatePreview,
+    links: [
+      { label: "Live demo", href: "https://codemate.arunabha.dev/", kind: "live" },
+      { label: "GitHub", href: "https://github.com/arunabha369/CodeMate", kind: "github" },
+    ],
+  },
+  {
+    id: "trading-zone",
+    name: "Trading Zone",
+    category: "Stock Broking & Investments",
+    platform: "Website",
+    year: "2026",
+    summary:
+      "A fast, mobile-first website for a Nirmal Bang associate brokerage in Kalna, presenting demat, trading, mutual fund and IPO services with one-tap call and enquiry.",
+    features: ["Business Website", "Services Showcase", "Call & Enquiry CTAs", "SEO Metadata", "Mobile-first Design"],
+    tech: ["Next.js", "Tailwind", "Framer Motion"],
+    logoClassName: "bg-[#0B120D] text-[#4ADE80] border border-[#1C3324]",
+    logo: <TrendingUp className="w-5 h-5" strokeWidth={2.4} />,
+    Preview: TradingZonePreview,
+    links: [
+      { label: "Visit site", href: "https://trading-zone-zeta.vercel.app/", kind: "live" },
+      { label: "GitHub", href: "https://github.com/arunabha369/trading-zone", kind: "github" },
+    ],
   },
 ];
 
@@ -310,6 +402,120 @@ function SwapnoPreview() {
           className="block h-auto w-full"
         />
       </PhoneFrame>
+    </PreviewCanvas>
+  );
+}
+
+/* ─────────────────────────────────────────
+   PUJA PARIKRAMA — REAL SCREENSHOTS
+───────────────────────────────────────── */
+function PujaParikramaPreview() {
+  return (
+    <PreviewCanvas
+      label="Puja Parikrama landing page, live pandal map and mobile map view"
+      background="radial-gradient(70% 60% at 85% 5%, rgba(251,191,36,0.22), transparent 70%), radial-gradient(60% 60% at 0% 100%, rgba(220,38,38,0.35), transparent 70%), #2A0B0B"
+    >
+      <BrowserWindow tone="light" className="absolute right-[4%] top-[6%] w-[60%]">
+        <Image
+          src="/images/projects/puja-parikrama-home.jpg"
+          alt=""
+          width={1600}
+          height={1000}
+          sizes={WINDOW_SIZES}
+          className="block h-auto w-full"
+        />
+      </BrowserWindow>
+
+      <BrowserWindow className="absolute bottom-[6%] left-[4%] w-[66%]">
+        <Image
+          src="/images/projects/puja-parikrama-map.jpg"
+          alt=""
+          width={1600}
+          height={1000}
+          sizes={WINDOW_SIZES}
+          className="block h-auto w-full"
+        />
+      </BrowserWindow>
+
+      <PhoneFrame
+        className="absolute bottom-[5%] right-[6%] w-[18%]"
+        screenClassName="bg-[#161616] text-white"
+      >
+        <Image
+          src="/images/projects/puja-parikrama-map-mobile.jpg"
+          alt=""
+          width={540}
+          height={1080}
+          sizes="(min-width: 1024px) 130px, (min-width: 768px) 150px, 18vw"
+          className="block h-auto w-full"
+        />
+      </PhoneFrame>
+    </PreviewCanvas>
+  );
+}
+
+/* ─────────────────────────────────────────
+   CODEMATE & TRADING ZONE — REAL SCREENSHOTS
+───────────────────────────────────────── */
+const CARD_WINDOW_SIZES = "(min-width: 1024px) 340px, (min-width: 768px) 220px, 60vw";
+const CARD_PHONE_SIZES = "(min-width: 1024px) 120px, (min-width: 768px) 80px, 22vw";
+
+function CodeMatePreview() {
+  return (
+    <PreviewCanvas
+      label="CodeMate landing page on desktop and mobile"
+      background="radial-gradient(60% 60% at 85% 10%, rgba(236,72,153,0.35), transparent 70%), radial-gradient(60% 60% at 0% 100%, rgba(147,51,234,0.3), transparent 70%), #0B0510"
+    >
+      <BrowserWindow className="absolute left-[5%] top-[19%] w-[64%]">
+        <Image
+          src="/images/projects/codemate-home.jpg"
+          alt=""
+          width={1600}
+          height={1000}
+          sizes={CARD_WINDOW_SIZES}
+          className="block h-auto w-full"
+        />
+      </BrowserWindow>
+      <PhoneFrame className="absolute right-[5%] top-[9%] w-[23%]" screenClassName="bg-black text-white">
+        <Image
+          src="/images/projects/codemate-mobile.jpg"
+          alt=""
+          width={540}
+          height={1080}
+          sizes={CARD_PHONE_SIZES}
+          className="block h-auto w-full"
+        />
+      </PhoneFrame>
+    </PreviewCanvas>
+  );
+}
+
+function TradingZonePreview() {
+  return (
+    <PreviewCanvas
+      label="Trading Zone services page on desktop and home page on mobile"
+      background="radial-gradient(60% 60% at 15% 10%, rgba(74,222,128,0.22), transparent 70%), radial-gradient(60% 60% at 100% 100%, rgba(20,83,45,0.5), transparent 70%), #060A07"
+    >
+      <PhoneFrame className="absolute left-[5%] top-[9%] w-[23%]" screenClassName="bg-[#0B0B0B] text-white">
+        <Image
+          src="/images/projects/trading-zone-mobile.jpg"
+          alt=""
+          width={540}
+          height={1080}
+          sizes={CARD_PHONE_SIZES}
+          className="block h-auto w-full"
+        />
+      </PhoneFrame>
+      <BrowserWindow className="absolute right-[5%] top-[19%] w-[64%]">
+        <Image
+          src="/images/projects/trading-zone-services.jpg"
+          alt=""
+          width={1600}
+          height={1000}
+          sizes={CARD_WINDOW_SIZES}
+          className="block h-auto w-full"
+        />
+      </BrowserWindow>
     </PreviewCanvas>
   );
 }
@@ -799,13 +1005,45 @@ function ProjectDetails({ project, featured = false }: { project: Project; featu
           <span className="font-sans text-[13px] font-medium text-[#6B6B6B]">
             {project.platform} · {project.year}
           </span>
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 font-sans text-[12px] font-semibold text-emerald-700">
-            <span aria-hidden="true" className="size-1.5 rounded-full bg-emerald-500" />
-            Delivered
-          </span>
+          {project.links?.length ? (
+            <div className="flex flex-wrap items-center gap-2">
+              {project.links.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${link.label}: ${project.name} (opens in a new tab)`}
+                  className={cn(
+                    "inline-flex h-9 items-center gap-1.5 rounded-full border-[1.5px] px-3.5 font-sans text-[12.5px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
+                    link.kind === "live"
+                      ? "border-[#222] bg-[#111] text-white hover:bg-primary hover:border-primary"
+                      : "border-[#222] bg-white text-[#111] hover:bg-[#F5F2EB]"
+                  )}
+                >
+                  {link.kind === "github" && <GitHubIcon className="size-3.5" />}
+                  {link.label}
+                  {link.kind === "live" && <ArrowUpRight aria-hidden="true" className="size-3.5" />}
+                </a>
+              ))}
+            </div>
+          ) : (
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 font-sans text-[12px] font-semibold text-emerald-700">
+              <span aria-hidden="true" className="size-1.5 rounded-full bg-emerald-500" />
+              Delivered
+            </span>
+          )}
         </div>
       </div>
     </div>
+  );
+}
+
+function GitHubIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={cn("fill-current", className)}>
+      <path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.91c.58.1.79-.25.79-.56v-2.02c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
+    </svg>
   );
 }
 
@@ -816,7 +1054,8 @@ const CARD_BASE =
    MAIN FEATURED PROJECTS SECTION
 ───────────────────────────────────────── */
 export function Projects() {
-  const [featured, ...others] = PROJECTS;
+  const featured = PROJECTS.filter((project) => project.featured);
+  const others = PROJECTS.filter((project) => !project.featured);
 
   return (
     <MotionConfig reducedMotion="user">
@@ -885,26 +1124,47 @@ export function Projects() {
 
           {/* ── Projects ── */}
           <div className="mt-10 lg:mt-14 grid gap-5 lg:gap-6">
-            <motion.article
-              {...reveal()}
-              aria-labelledby={`${featured.id}-title`}
-              className={cn(CARD_BASE, "grid lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:gap-4")}
-            >
-              <featured.Preview />
-              <div className="px-2 pb-2 pt-6 sm:px-4 sm:pb-4 lg:py-6 lg:pl-6 lg:pr-5">
-                <ProjectDetails project={featured} featured />
-              </div>
-            </motion.article>
+            {featured.map((project, i) => {
+              const flipped = i % 2 === 1;
+              return (
+                <motion.article
+                  key={project.id}
+                  {...reveal()}
+                  aria-labelledby={`${project.id}-title`}
+                  className={cn(
+                    CARD_BASE,
+                    "grid lg:gap-4",
+                    flipped
+                      ? "lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)]"
+                      : "lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]"
+                  )}
+                >
+                  <div className={cn("h-full", flipped && "lg:order-2")}>
+                    <project.Preview />
+                  </div>
+                  <div
+                    className={cn(
+                      "px-2 pb-2 pt-6 sm:px-4 sm:pb-4 lg:py-6",
+                      flipped ? "lg:order-1 lg:pl-5 lg:pr-6" : "lg:pl-6 lg:pr-5"
+                    )}
+                  >
+                    <ProjectDetails project={project} featured />
+                  </div>
+                </motion.article>
+              );
+            })}
 
             <div className="grid gap-5 md:grid-cols-2 lg:gap-6">
               {others.map((project, i) => (
                 <motion.article
                   key={project.id}
-                  {...reveal(0.08 * i)}
+                  {...reveal(0.08 * (i % 2))}
                   aria-labelledby={`${project.id}-title`}
                   className={cn(CARD_BASE, "flex h-full flex-col")}
                 >
-                  <project.Preview />
+                  <div className="shrink-0">
+                    <project.Preview />
+                  </div>
                   <div className="flex flex-1 flex-col px-2 pb-2 pt-6 sm:px-3 sm:pb-3">
                     <ProjectDetails project={project} />
                   </div>
